@@ -1,11 +1,13 @@
 <template>
   <div class="input-padding">
-    <input type="text" />
+    <input :type="Type" :placeholder="Placeholder" />
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["Type", "Placeholder"]
+};
 </script>
 
 <style lang="less" scoped>
