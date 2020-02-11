@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     这里是首页
-    <router-link to="./Login.vue">登录页</router-link>
+    <router-link to="./login">登录页</router-link>
   </div>
 </template>
 
@@ -9,5 +9,4 @@
 export default {};
 </script>
 
-<style>
-</style>
+<style></style>
