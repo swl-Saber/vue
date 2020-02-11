@@ -7,17 +7,20 @@
     <div class="logo">
       <span class="iconfont iconnew"></span>
     </div>
-    <authinput></authinput>
-    <authinput></authinput>
+    <authinput Type="text" Placeholder="用户名 / 手机号码"></authinput>
+    <authinput Type="password" Placeholder="密码"></authinput>
+    <authbutton text="登录"></authbutton>
   </div>
 </template>
 
 <script>
 // 可以使用 @ 符号直接代表 src 所在目录
 import authInput from "@/components/authInput.vue";
+import authButton from "@/components/authButton.vue";
 export default {
   components: {
-    authinput: authInput
+    authinput: authInput,
+    authbutton: authButton
   }
 };
 </script>
