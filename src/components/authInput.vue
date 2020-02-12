@@ -1,12 +1,12 @@
 <template>
   <div class="input-padding">
-    <input :type="Type" :placeholder="Placeholder" />
+    <input :type="itype" :placeholder="iplaceholder" />
   </div>
 </template>
 
 <script>
 export default {
-  props: ["Type", "Placeholder"]
+  props: ["itype", "iplaceholder"]
 };
 </script>
 
@@ -21,6 +21,7 @@ export default {
     border-bottom: 1px solid black;
     background-color: #fff;
     outline: none;
+    font-size: 5.556vw;
   }
 }
 </style>
