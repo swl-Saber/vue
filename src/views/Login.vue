@@ -7,20 +7,37 @@
     <div class="logo">
       <span class="iconfont iconnew"></span>
     </div>
-    <authinput Type="text" Placeholder="用户名 / 手机号码"></authinput>
-    <authinput Type="password" Placeholder="密码"></authinput>
-    <authbutton text="登录"></authbutton>
+    <!-- rule用来验证输入合法性的正则表达式 (我们这里IDE传值，传一个字符串进去，子组件在转换成正则对象) -->
+    <authinput
+      itype="text"
+      iplaceholder="用户名 / 手机号码"
+      irule="^.{3,10}$"
+      errMsg="请正确输入用户名"
+    ></authinput>
+    <authinput
+      itype="password"
+      iplaceholder="密码"
+      irule="^.{6}$"
+      errMsg="请正确输入密码"
+    ></authinput>
+    <authbutton text="登录" @sendmsg="msg"></authbutton>
   </div>
 </template>
 
 <script>
 // 可以使用 @ 符号直接代表 src 所在目录
+//引入封装组件
 import authInput from "@/components/authInput.vue";
 import authButton from "@/components/authButton.vue";
 export default {
   components: {
     authinput: authInput,
     authbutton: authButton
+  },
+  methods: {
+    msg() {
+      console.log("父组件接收到了");
+    }
   }
 };
 </script>
