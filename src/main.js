@@ -3,6 +3,11 @@ import App from "./App.vue";
 import router from "./router";
 //引入vant库
 import Vant from "vant";
+//引入axios
+import axios from "axios";
+//绑定到原型
+Vue.prototype.$axios = axios;
+
 Vue.config.productionTip = false;
 //注册组件库
 Vue.use(Vant);
