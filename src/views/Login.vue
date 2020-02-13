@@ -11,16 +11,18 @@
     <authinput
       itype="text"
       iplaceholder="用户名 / 手机号码"
-      irule="^.{3,10}$"
+      irule="^.{3,11}$"
       errMsg="请正确输入用户名"
+      @valueChange="setUsername"
     ></authinput>
     <authinput
       itype="password"
       iplaceholder="密码"
       irule="^.{6}$"
       errMsg="请正确输入密码"
+      @valueChange="setPassword"
     ></authinput>
-    <authbutton text="登录" @sendmsg="msg"></authbutton>
+    <authbutton text="登录" @clickbtn="login"></authbutton>
   </div>
 </template>
 
@@ -34,9 +36,74 @@ export default {
     authinput: authInput,
     authbutton: authButton
   },
+  data() {
+    return {
+      username: "",
+      password: ""
+    };
+  },
   methods: {
-    msg() {
-      console.log("父组件接收到了");
+    setUsername(username) {
+      this.username = username;
+    },
+    setPassword(password) {
+      this.password = password;
+    },
+    login() {
+      // console.log("父组件接收到了");
+      //尝试获取数据
+      // this.$axios({
+      //   url: "http://liangwei.tech:3000/post",
+      //   method: "get",
+      //   params: {
+      //     id: 1
+      //   }
+      // })
+      //   .then(res => {
+      //     console.log("获取成功");
+      //     console.log(res);
+      //   })
+      //   .catch(err => {
+      //     console.log("获取失败");
+      //     console.log(err);
+      //   });
+      this.$axios({
+        url: "http://liangwei.tech:3000/login",
+        method: "post",
+        data: {
+          username: this.username,
+          password: this.password
+        }
+      })
+        .then(res => {
+          const { message, statusCode } = res.data;
+          // console.log(message);
+          console.log(res.data);
+          // if (statusCode == 200 && message) {
+          //   this.$toast.success(message);
+          // }
+          //新版服务器的判断
+          //无论成功还是失败，都先响应200状态码
+          // 所以全都会进来then里面
+          if (statusCode) {
+            this.$toast.fail(message); //登录失败
+          } else {
+            this.$toast.success(message); //登录成功
+            //接下来进行本地存储和跳转页面
+            const { data } = res.data;
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user_id", data.user.id);
+            this.$router.push({
+              path: "/"
+            });
+          }
+        })
+        .catch(err => {
+          console.log("登录失败");
+          console.dir(err);
+          // 防御性编程, 万一后台连 message 都没有传出来怎么办?
+          this.$toast.fail(err.response.data.message || "系统错误");
+        });
     }
   }
 };
