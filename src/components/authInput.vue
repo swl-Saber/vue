@@ -28,12 +28,13 @@ export default {
       // console.log("输入框的值发生了变化");
       // console.log(event);
       // console.log(event.target);
-      console.log(event.target.value); //获取到输入框的值
+      // console.log(event.target.value); //获取到输入框的值
       const regExp = new RegExp(this.irule); //代表任意字符3-10以内都是合法
       // console.log(this.irule);
 
       this.isValid = regExp.test(event.target.value); //test检索正则表达式与输入的字符是否匹配
       // console.log(this.isValid);
+      this.$emit("valueChange", event.target.value);
     },
     showAlert() {
       //这里是失去焦点时触发的函数
