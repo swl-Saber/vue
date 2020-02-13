@@ -6,10 +6,28 @@
     <div class="logo">
       <span class="iconfont iconnew"></span>
     </div>
-    <authinput itype="text" iplaceholder="用户名 / 手机号码"></authinput>
-    <authinput itype="text" iplaceholder="昵称"></authinput>
-    <authinput itype="password" iplaceholder="密码"></authinput>
-    <authbutton text="注册"></authbutton>
+    <authinput
+      itype="text"
+      iplaceholder="用户名 / 手机号码"
+      irule="^.{3,11}$"
+      errMsg="请正确输入用户名"
+      @valueChange="setUsername"
+    ></authinput>
+    <authinput
+      itype="text"
+      iplaceholder="昵称"
+      irule="^.{3,10}$"
+      errMsg="请正确输入昵称"
+      @valueChange="setNickname"
+    ></authinput>
+    <authinput
+      itype="password"
+      iplaceholder="密码"
+      irule="^.{6,16}$"
+      errMsg="请正确输入密码"
+      @valueChange="setPassword"
+    ></authinput>
+    <authbutton text="注册" @clickbtn="register"></authbutton>
   </div>
 </template>
 
@@ -22,6 +40,61 @@ export default {
   components: {
     authinput: authInput,
     authbutton: authButton
+  },
+  data() {
+    return {
+      username: "",
+      nickname: "",
+      password: ""
+    };
+  },
+  methods: {
+    setUsername(username) {
+      this.username = username;
+    },
+    setNickname(nickname) {
+      this.nickname = nickname;
+    },
+    setPassword(password) {
+      this.password = password;
+    },
+    register() {
+      //这里优化用户体验，输入各项为空时出现提醒
+      if (!this.username || !this.nickname || !this.password) {
+        this.$toast("内容不能为空");
+      }
+      // 发送axios请求
+      this.$axios({
+        url: "http://liangwei.tech:3000/register",
+        method: "post",
+        data: {
+          username: this.username,
+          nickname: this.nickname,
+          password: this.password
+        }
+      })
+        .then(res => {
+          console.log(res);
+
+          const { message, statusCode } = res.data;
+          if (statusCode) {
+            this.$toast.fail(message);
+            // console.log(message); //注册失败
+          } else {
+            this.$toast.success(message);
+            // console.log(message); // 注册成功
+
+            //跳回主页
+            this.$router.push({
+              path: "/"
+            });
+          }
+        })
+        .catch(err => {
+          console.dir(err);
+          console.log("注册失败");
+        });
+    }
   }
 };
 </script>
