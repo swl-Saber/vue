@@ -92,7 +92,9 @@ export default {
         })
         .catch(err => {
           console.dir(err);
-          console.log("注册失败");
+          // console.log("注册失败");
+          // 防御性编程, 万一后台连 message 都没有传出来怎么办?
+          this.$toast.fail(err.response.data.message || "系统错误");
         });
     }
   }
