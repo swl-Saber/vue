@@ -1,6 +1,6 @@
 <template>
   <div class="btnpadding">
-    <div class="button" @click="sendmsg">{{ text }}</div>
+    <div class="button" @click="sendClick">{{ text }}</div>
   </div>
 </template>
 
@@ -8,8 +8,9 @@
 export default {
   props: ["text"],
   methods: {
-    loginbtn() {
-      this.$emit("sendmsg", event);
+    sendClick() {
+      this.$emit("clickbtn");
+      // console.log("子组件发送事件");
     }
   }
 };
