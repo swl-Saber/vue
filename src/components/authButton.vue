@@ -27,10 +27,10 @@ export default {
     // box-sizing: border-box;
     outline: none;
     border: none;
-    background-color: #cc3300;
+    background-color: rgb(252, 98, 124);
     text-align: center;
     color: #fff;
-    font-size: 5.556vw;
+    font-size: 4.444vw;
   }
 }
 </style>

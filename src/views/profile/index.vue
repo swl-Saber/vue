@@ -18,7 +18,10 @@
       </div>
     </div>
     <div class="btnlist">
-      <tabbar></tabbar>
+      <tabbar tableft="我的关注" tabright="关注的用户"></tabbar>
+      <tabbar tableft="我的跟帖" tabright="跟帖/回复"></tabbar>
+      <tabbar tableft="我的收藏" tabright="文章/视频"></tabbar>
+      <tabbar tableft="设置"></tabbar>
     </div>
   </div>
 </template>
@@ -51,14 +54,14 @@ export default {
       margin-top: 5vw;
       margin-left: 4.167vw;
       .name {
-        font-size: 3.889vw;
+        font-size: 4.444vw;
         .iconxingbienv {
-          font-size: 3.889vw;
-          color: pink;
+          font-size: 5vw;
+          color: #ff468a;
         }
       }
       .time {
-        font-size: 2.778vw;
+        font-size: 3.889vw;
         color: #ccc;
         margin-top: 2.222vw;
       }

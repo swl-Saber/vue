@@ -63,12 +63,12 @@ export default {
     box-sizing: border-box;
     border: none;
     border-bottom: 1px solid black;
-    background-color: #fff;
+    background-color: transparent;
     outline: none;
-    font-size: 5.556vw;
+    font-size: 4.444vw;
   }
   .err {
-    border-color: red;
+    border-color: #ff468a;
   }
   .success {
     border-color: #666;

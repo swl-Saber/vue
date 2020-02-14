@@ -124,7 +124,7 @@ export default {
   text-align: center;
   span {
     font-size: 35vw;
-    color: #d81e06;
+    color: rgb(252, 98, 124);
   }
 }
 </style>

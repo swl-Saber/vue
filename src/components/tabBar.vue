@@ -1,7 +1,7 @@
 <template>
   <div class="tab">
-    <div class="left">我的关注</div>
-    <div class="right">关注的用户</div>
+    <div class="left">{{tableft}}</div>
+    <div class="right">{{tabright}}</div>
     <div class="arrow">
       <span class="iconfont iconjiantou1"></span>
     </div>
@@ -9,15 +9,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["tableft", "tabright"]
+};
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .tab {
   display: flex;
   padding: 5.556vw;
   border-bottom: 1px solid #eee;
   font-size: 3.889vw;
+  padding-left: 0;
+  margin-left: 5.556vw;
   .left {
     flex: 1;
   }
