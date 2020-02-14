@@ -12,6 +12,7 @@
       irule="^.{3,11}$"
       errMsg="请正确输入用户名"
       @valueChange="setUsername"
+      @sendTrue="changeTrue"
     ></authinput>
     <authinput
       itype="text"
@@ -19,6 +20,7 @@
       irule="^.{3,10}$"
       errMsg="请正确输入昵称"
       @valueChange="setNickname"
+      @sendTrue="changeTrue"
     ></authinput>
     <authinput
       itype="password"
@@ -26,6 +28,7 @@
       irule="^.{6,16}$"
       errMsg="请正确输入密码"
       @valueChange="setPassword"
+      @sendTrue="changeTrue"
     ></authinput>
     <authbutton text="注册" @clickbtn="register"></authbutton>
   </div>
@@ -45,7 +48,8 @@ export default {
     return {
       username: "",
       nickname: "",
-      password: ""
+      password: "",
+      isTrue: []
     };
   },
   methods: {
@@ -58,44 +62,53 @@ export default {
     setPassword(password) {
       this.password = password;
     },
+    // 这个函数用来判断不规范注册能成功的问题
+    changeTrue(isTrue) {
+      this.isTrue.push(isTrue); // 把子组件传过来的this.isValid的false值赋值
+    },
     register() {
       //这里优化用户体验，输入各项为空时出现提醒
       if (!this.username || !this.nickname || !this.password) {
         this.$toast("内容不能为空");
       }
-      // 发送axios请求
-      this.$axios({
-        url: "http://liangwei.tech:3000/register",
-        method: "post",
-        data: {
-          username: this.username,
-          nickname: this.nickname,
-          password: this.password
-        }
-      })
-        .then(res => {
-          console.log(res);
-
-          const { message, statusCode } = res.data;
-          if (statusCode) {
-            this.$toast.fail(message);
-            // console.log(message); //注册失败
-          } else {
-            this.$toast.success(message);
-            // console.log(message); // 注册成功
-
-            //跳回主页
-            this.$router.push({
-              path: "/"
-            });
+      let i = this.isTrue.indexOf(false);
+      console.log(i);
+      //这里用来判断是否能进行发送请求
+      if (i === -1) {
+        // 发送axios请求
+        this.$axios({
+          url: "http://liangwei.tech:3000/register",
+          method: "post",
+          data: {
+            username: this.username,
+            nickname: this.nickname,
+            password: this.password
           }
         })
-        .catch(err => {
-          console.dir(err);
-          // console.log("注册失败");
-          // 防御性编程, 万一后台连 message 都没有传出来怎么办?
-          this.$toast.fail(err.response.data.message || "系统错误");
-        });
+          .then(res => {
+            console.log(res);
+
+            const { message, statusCode } = res.data;
+            if (statusCode) {
+              this.$toast.fail(message);
+              // console.log(message); //注册失败
+            } else {
+              this.$toast.success(message);
+              // console.log(message); // 注册成功
+
+              //跳回主页
+              this.$router.push({
+                path: "/"
+              });
+            }
+          })
+          .catch(err => {
+            console.dir(err);
+            // console.log("注册失败");
+            // 防御性编程, 万一后台连 message 都没有传出来怎么办?
+            this.$toast.fail(err.response.data.message || "系统错误");
+          });
+      }
     }
   }
 };
