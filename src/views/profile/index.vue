@@ -1,0 +1,79 @@
+<template>
+  <div class="bgi">
+    <div class="profile">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1581674911940&di=173affc623e7096b3c38656870f841a4&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn20117%2F560%2Fw1080h1080%2F20190424%2F1ee9-hvvuiyn8653738.jpg"
+        alt
+        class="pic"
+      />
+      <div class="profilemid">
+        <div class="name">
+          <span class="iconfont iconxingbienv"></span>
+          火星网友
+        </div>
+        <div class="time">2019-10-10</div>
+      </div>
+      <div class="arrow">
+        <span class="iconfont iconjiantou1"></span>
+      </div>
+    </div>
+    <div class="btnlist">
+      <tabbar></tabbar>
+    </div>
+  </div>
+</template>
+
+<script>
+import tabBar from "@/components/tabBar.vue";
+export default {
+  components: {
+    tabbar: tabBar
+  }
+};
+</script>
+
+<style lang="less" scoped>
+.bgi {
+  .profile {
+    display: flex;
+    padding-top: 8.333vw;
+    margin-bottom: 8.333vw;
+    .pic {
+      width: 20vw;
+      border-radius: 50%;
+      margin-left: 6.944vw;
+    }
+    .profilemid {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      // justify-content: center;
+      margin-top: 5vw;
+      margin-left: 4.167vw;
+      .name {
+        font-size: 3.889vw;
+        .iconxingbienv {
+          font-size: 3.889vw;
+          color: pink;
+        }
+      }
+      .time {
+        font-size: 2.778vw;
+        color: #ccc;
+        margin-top: 2.222vw;
+      }
+    }
+    .arrow {
+      display: flex;
+      align-items: center;
+      margin-right: 2.778vw;
+      .iconjiantou1 {
+        color: #e4e4e4;
+        font-size: 3.889vw;
+
+        // flex-direction:row;
+      }
+    }
+  }
+}
+</style>
