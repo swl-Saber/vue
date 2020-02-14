@@ -46,6 +46,7 @@ export default {
         //正常这里的提醒方式，是产品或设计共同决定的
         // alert(this.errMsg); //因为输入框需求不一样，需要传值
         this.$toast(this.errMsg);
+        this.$emit("sendTrue", this.isValid); //这里的值为false
       }
     }
   }
