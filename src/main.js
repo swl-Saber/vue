@@ -18,10 +18,23 @@ axios.defaults.baseURL = "http://liangwei.tech:3000"
 //from指的是来源路由
 //next 是处理完逻辑之后必须调用函数，告诉守卫放行的函数
 router.beforeEach((to, from, next) => {
-  console.log('拦截路由跳转');
+  // console.log('拦截路由跳转');
   console.log(to);
-  console.log(from);
+  // console.log(from);
 
+  //我们要判断localStorage里面是否有token，可能有用户恶意修改token
+  const token = localStorage.getItem('token')
+  //跳转到个人中心，判断是否有token
+  //有才放行,否则跳转到登录页
+  if (to.path == '/profile') {
+    if (token) {
+      return next();
+    } else {
+      return router.replace({
+        path: '/login'
+      })
+    }
+  }
 
   next(); //如果漏了，路由跳转过程会卡死
 })
@@ -56,6 +69,16 @@ axios.interceptors.response.use(res => {
     //所以 以前用的this.$toast.fail()
     // console.log('这里是错误处理');
     Toast.fail(message || '系统错误')
+
+    //前面路由守卫，检测不到token，报401这里要进行逻辑判断进行跳转到登录页面
+    if (statusCode == 401) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user_id');
+
+      router.push({
+        path: '/login'
+      })
+    }
   }
   //最终必须return 你的res这样整个请求才能继续处理下去
   return res;
