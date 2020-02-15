@@ -40,7 +40,9 @@ export default {
   .profile {
     display: flex;
     padding-top: 8.333vw;
-    margin-bottom: 8.333vw;
+    padding-bottom: 8.333vw;
+
+    border-bottom: 5px solid #eee;
     .pic {
       width: 20vw;
       border-radius: 50%;
