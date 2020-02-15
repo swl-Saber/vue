@@ -8,7 +8,25 @@ import axios from "axios";
 // 设置基准路径
 axios.defaults.baseURL = "http://liangwei.tech:3000"
 //如果是本地路径
-// axios.defaults.baseURL = "http://127.0.0.0.1"
+// axios.defaults.baseURL = "http://127.0.0.0.1:3000"
+
+//axios 全局拦截器
+//axios.intercetors 这是拦截器的设置
+//分成两种，一个是请求拦截，一个是响应拦截
+//现在先用响应拦截
+//叫 axios.intercetors.response.use(),带一个回调函数用来处理接受到的响应
+axios.intercetors.response.use(res => {
+  console.log('拦截了响应');
+  //既然在这里拦截了就可以先同意处理错误
+  //这里可以获取到响应
+  console.log(res.data);
+  //判断错误处理
+const {statusCode}=res.data;
+const errorRegExp=/^4\d\d$/
+  //最终必须return 你的res这样整个请求才能继续处理下去
+  return res;
+
+})
 //绑定到原型
 Vue.prototype.$axios = axios;
 
