@@ -85,9 +85,10 @@ export default {
           //新版服务器的判断
           //无论成功还是失败，都先响应200状态码
           // 所以全都会进来then里面
-          if (statusCode) {
-            this.$toast.fail(message); //登录失败
-          } else {
+          // if (statusCode) {
+          //   this.$toast.fail(message); //登录失败
+          // } else {
+          if (!statusCode) {
             this.$toast.success(message); //登录成功
             //接下来进行本地存储和跳转页面
             const { data } = res.data;

@@ -89,10 +89,11 @@ export default {
             console.log(res);
 
             const { message, statusCode } = res.data;
-            if (statusCode) {
-              this.$toast.fail(message);
-              // console.log(message); //注册失败
-            } else {
+            // if (statusCode) {
+            //   this.$toast.fail(message);
+            //   // console.log(message); //注册失败
+            // } else {
+            if (!statusCode) {
               this.$toast.success(message);
               // console.log(message); // 注册成功
 
