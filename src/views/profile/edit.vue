@@ -9,7 +9,11 @@
     <tabbar tableft="密码" tabright="******"></tabbar>
     <tabbar v-if="userdata.gender==1" tableft="性别" tabright="男"></tabbar>
     <tabbar v-else tableft="性别" tabright="女"></tabbar>
-    <van-dialog v-model="isShownickname" title="标题" show-cancel-button>123</van-dialog>
+    <!-- 昵称弹窗提示 -->
+    <van-dialog v-model="isShownickname" title="标题" show-cancel-button>
+      123
+      <van-field v-model="nickname" placeholder="请输入昵称" />
+    </van-dialog>
   </div>
 </template>
 
@@ -24,7 +28,8 @@ export default {
   data() {
     return {
       userdata: {},
-      isShownickname: true
+      isShownickname: true,
+      nickname: ""
     };
   },
   mounted() {
