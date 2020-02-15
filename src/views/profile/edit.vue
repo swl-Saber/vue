@@ -1,15 +1,28 @@
 <template>
-  <edit @title="编辑资料"></edit>
+  <div>
+    <topnav title="编辑资料"></topnav>
+    <div class="topImg">
+      <img src="@/assets/timg.jpg" alt />
+    </div>
+  </div>
 </template>
 
 <script>
-import Edit from "@/components/topNav.vue";
+import topNav from "@/components/topNav.vue";
 export default {
   components: {
-    edit: Edit
+    topnav: topNav
   }
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+.topImg {
+  text-align: center;
+  img {
+    width: 20vw;
+    height: 20vw;
+    border-radius: 50%;
+  }
+}
 </style>

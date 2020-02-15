@@ -3,7 +3,7 @@
     <div class="arrow">
       <span class="iconfont iconjiantou2"></span>
     </div>
-    <div class="title">编辑页面</div>
+    <div class="title">{{title}}</div>
   </div>
 </template>
 
@@ -27,6 +27,7 @@ export default {
     flex: 1;
     text-align: center;
     font-size: 4.444vw;
+    padding-right: 2.778vw;
   }
 }
 </style>
