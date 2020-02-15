@@ -18,7 +18,7 @@ export default {
 .tab {
   display: flex;
   padding: 5.556vw;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgb(158, 157, 157);
   font-size: 3.889vw;
   padding-left: 0;
   margin-left: 5.556vw;

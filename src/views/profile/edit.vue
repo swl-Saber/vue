@@ -4,14 +4,19 @@
     <div class="topImg">
       <img src="@/assets/timg.jpg" alt />
     </div>
+    <tabbar tableft="昵称" tabright="火星网友"></tabbar>
+    <tabbar tableft="密码" tabright="******"></tabbar>
+    <tabbar tableft="性别" tabright="男"></tabbar>
   </div>
 </template>
 
 <script>
 import topNav from "@/components/topNav.vue";
+import tabBar from "@/components/tabBar.vue";
 export default {
   components: {
-    topnav: topNav
+    topnav: topNav,
+    tabbar: tabBar
   }
 };
 </script>
