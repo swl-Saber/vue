@@ -2,11 +2,13 @@
   <div>
     <topnav title="编辑资料"></topnav>
     <div class="topImg">
-      <img src="@/assets/timg.jpg" alt />
+      <img v-if="userdata.head_img" :src="$axios.defaults.baseURL+userdata.head_img" alt />
+      <img v-else src="@/assets/timg.jpg" alt />
     </div>
-    <tabbar tableft="昵称" tabright="火星网友"></tabbar>
+    <tabbar tableft="昵称" :tabright="userdata.nickname"></tabbar>
     <tabbar tableft="密码" tabright="******"></tabbar>
-    <tabbar tableft="性别" tabright="男"></tabbar>
+    <tabbar v-if="userdata.gender==1" tableft="性别" tabright="男"></tabbar>
+    <tabbar v-else tableft="性别" tabright="女"></tabbar>
   </div>
 </template>
 
