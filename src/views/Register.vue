@@ -77,7 +77,7 @@ export default {
       if (i === -1) {
         // 发送axios请求
         this.$axios({
-          url: "http://liangwei.tech:3000/register",
+          url: "/register",
           method: "post",
           data: {
             username: this.username,

@@ -5,6 +5,10 @@ import router from "./router";
 import Vant from "vant";
 //引入axios
 import axios from "axios";
+// 设置基准路径
+axios.defaults.baseURL = "http://liangwei.tech:3000"
+//如果是本地路径
+// axios.defaults.baseURL = "http://127.0.0.0.1"
 //绑定到原型
 Vue.prototype.$axios = axios;
 

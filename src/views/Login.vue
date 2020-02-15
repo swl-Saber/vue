@@ -68,7 +68,7 @@ export default {
       //     console.log(err);
       //   });
       this.$axios({
-        url: "http://liangwei.tech:3000/login",
+        url: "/login",
         method: "post",
         data: {
           username: this.username,
