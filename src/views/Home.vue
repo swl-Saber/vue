@@ -6,7 +6,9 @@
     <br />
     <router-link to="./register">注册页</router-link>
     <br />
-    <router-link to="./profile">个人中心页</router-link>
+    <router-link to="./profile">个人中心</router-link>
+    <br />
+    <router-link to="./profile">编辑资料</router-link>
     <br />
     <div @click="editlogin">退出登录</div>
     <br />
