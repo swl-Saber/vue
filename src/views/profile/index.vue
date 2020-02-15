@@ -1,21 +1,23 @@
 <template>
   <div v-if="userdata">
-    <div class="profile">
-      <img v-if="userdata.head_img" :src="$axios.defaults.baseURL+userdata.head_img" class="pic" />
-      <!-- 数据库里的图片地址 -->
-      <img v-else src="@/assets/timg.jpg" class="pic" />
-      <div class="profilemid">
-        <div class="name">
-          <span v-if="userdata.gender==1" class="iconfont iconxingbienv"></span>
-          <span v-else class="iconfont iconxingbienan"></span>
-          {{userdata.nickname}}
+    <router-link to="/edit">
+      <div class="profile">
+        <img v-if="userdata.head_img" :src="$axios.defaults.baseURL+userdata.head_img" class="pic" />
+        <!-- 数据库里的图片地址 -->
+        <img v-else src="@/assets/timg.jpg" class="pic" />
+        <div class="profilemid">
+          <div class="name">
+            <span v-if="userdata.gender==1" class="iconfont iconxingbienv"></span>
+            <span v-else class="iconfont iconxingbienan"></span>
+            {{userdata.nickname}}
+          </div>
+          <div class="time">{{(userdata.create_date||'').split('T')[0]}}</div>
         </div>
-        <div class="time">{{(userdata.create_date||'').split('T')[0]}}</div>
+        <div class="arrow">
+          <span class="iconfont iconjiantou1"></span>
+        </div>
       </div>
-      <div class="arrow">
-        <span class="iconfont iconjiantou1"></span>
-      </div>
-    </div>
+    </router-link>
     <div class="btnlist">
       <tabbar tableft="我的关注" tabright="关注的用户"></tabbar>
       <tabbar tableft="我的跟帖" tabright="跟帖/回复"></tabbar>
