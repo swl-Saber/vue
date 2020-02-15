@@ -12,17 +12,31 @@ axios.defaults.baseURL = "http://liangwei.tech:3000"
 //如果是本地路径
 // axios.defaults.baseURL = "http://127.0.0.0.1:3000"
 
-//axios 全局拦截器
-//axios.intercetors 这是拦截器的设置
-//分成两种，一个是请求拦截，一个是响应拦截
-//现在先用响应拦截
-//叫 axios.interceptors.response.use(),带一个回调函数用来处理接受到的响应
+//全局前置路由守卫
+//这个回调函数，可以接受三个形参to,from,next
+//to 指的是目标路由
+//from指的是来源路由
+//next 是处理完逻辑之后必须调用函数，告诉守卫放行的函数
+router.beforeEach((to, from, next) => {
+  console.log('拦截路由跳转');
+  console.log(to);
+  console.log(from);
+
+
+  next(); //如果漏了，路由跳转过程会卡死
+})
 
 //单独引入vant-ui的一个组件
 import {
   Toast
 } from "vant";
 Vue.use(Toast)
+
+//axios 全局拦截器
+//axios.intercetors 这是拦截器的设置
+//分成两种，一个是请求拦截，一个是响应拦截
+//现在先用响应拦截
+//叫 axios.interceptors.response.use(),带一个回调函数用来处理接受到的响应
 //全局拦截响应
 axios.interceptors.response.use(res => {
   // console.log('拦截了响应');
