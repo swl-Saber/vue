@@ -19,7 +19,7 @@ axios.defaults.baseURL = "http://liangwei.tech:3000"
 //next 是处理完逻辑之后必须调用函数，告诉守卫放行的函数
 router.beforeEach((to, from, next) => {
   // console.log('拦截路由跳转');
-  console.log(to);
+  // console.log(to);
   // console.log(from);
 
   //我们要判断localStorage里面是否有token，可能有用户恶意修改token

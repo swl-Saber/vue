@@ -8,7 +8,7 @@
     <br />
     <router-link to="./profile">个人中心</router-link>
     <br />
-    <router-link to="./profile">编辑资料</router-link>
+    <router-link to="./edit">编辑资料</router-link>
     <br />
     <div @click="editlogin">退出登录</div>
     <br />
