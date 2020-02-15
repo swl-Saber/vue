@@ -34,8 +34,14 @@ export default {
   },
   methods: {
     logout() {
+      console.log("退出登录成功");
+
       localStorage.removeItem("token");
       localStorage.removeItem("user_id");
+
+      this.$router.replace({
+        path: "/login"
+      });
     }
   },
   data() {
