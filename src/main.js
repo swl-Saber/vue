@@ -25,10 +25,10 @@ import {
 Vue.use(Toast)
 //全局拦截响应
 axios.interceptors.response.use(res => {
-  console.log('拦截了响应');
+  // console.log('拦截了响应');
   //既然在这里拦截了就可以先同意处理错误
   //这里可以获取到响应
-  console.log(res.data);
+  // console.log(res.data);
   //判断错误处理
   const {
     statusCode,

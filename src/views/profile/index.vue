@@ -31,6 +31,26 @@ import tabBar from "@/components/tabBar.vue";
 export default {
   components: {
     tabbar: tabBar
+  },
+  data() {
+    return {
+      userdata: null
+    };
+  },
+  mounted() {
+    this.$axios({
+      url: "/user/" + localStorage.getItem("user_id"),
+      method: "get",
+      headers: {
+        Authorization: localStorage.getItem("token")
+      }
+    }).then(res => {
+      console.log(res.data);
+      const { data } = res.data;
+      if (data) {
+        this.userdata = data;
+      }
+    });
   }
 };
 </script>
