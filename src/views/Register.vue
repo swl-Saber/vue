@@ -25,7 +25,7 @@
     <authinput
       itype="password"
       iplaceholder="密码"
-      irule="^.{6,16}$"
+      irule="^.{3,16}$"
       errMsg="请正确输入密码"
       @valueChange="setPassword"
       @sendTrue="changeTrue"

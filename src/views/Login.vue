@@ -18,7 +18,7 @@
     <authinput
       itype="password"
       iplaceholder="密码"
-      irule="^.{6}$"
+      irule="^.{3,16}$"
       errMsg="请正确输入密码"
       @valueChange="setPassword"
     ></authinput>
@@ -78,7 +78,7 @@ export default {
         .then(res => {
           const { message, statusCode } = res.data;
           // console.log(message);
-          console.log(res.data);
+          // console.log(res.data);
           // if (statusCode == 200 && message) {
           //   this.$toast.success(message);
           // }
