@@ -26,7 +26,7 @@ router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
   //跳转到个人中心，判断是否有token
   //有才放行,否则跳转到登录页
-  if (to.path == '/profile') {
+  if (to.path == '/profile' || to.path == "/edit") {
     if (token) {
       return next();
     } else {
