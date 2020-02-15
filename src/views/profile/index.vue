@@ -21,6 +21,7 @@
       <tabbar tableft="我的跟帖" tabright="跟帖/回复"></tabbar>
       <tabbar tableft="我的收藏" tabright="文章/视频"></tabbar>
       <tabbar tableft="设置"></tabbar>
+      <button class="esc" @click="logout">退出登录</button>
     </div>
   </div>
 </template>
@@ -30,6 +31,12 @@ import tabBar from "@/components/tabBar.vue";
 export default {
   components: {
     tabbar: tabBar
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user_id");
+    }
   },
   data() {
     return {
@@ -100,6 +107,16 @@ export default {
 
       // flex-direction:row;
     }
+  }
+}
+.btnlist {
+  .esc {
+    font-size: 3.889vw;
+    background-color: #ff74a7;
+    color: white;
+    border-radius: 25%;
+    margin-top: 1.389vw;
+    margin-left: 2.778vw;
   }
 }
 </style>
