@@ -1,8 +1,21 @@
+//脚手架引入vue，根实例组件，路由配置
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 
-//引入axios
+//全局引入vant-ui组件库并配置
+import Vant from "vant";
+//注册组件库
+Vue.use(Vant);
+//引入组件样式
+import "vant/lib/index.css";
+//局部引入vant-ui的一个组件
+import {
+  Toast
+} from "vant";
+// Vue.use(Toast) 挂载到组件中
+
+//引入axios ajax库并进行配置
 import axios from "axios";
 //绑定到原型
 Vue.prototype.$axios = axios;
@@ -35,9 +48,9 @@ router.beforeEach((to, from, next) => {
   ]
   if (needPagePath.indexOf(to.path) !== -1) {
     if (token) {
-      return next();
+      next();
     } else {
-      return router.replace({
+      router.push({
         path: '/login'
       })
     }
@@ -46,11 +59,7 @@ router.beforeEach((to, from, next) => {
   next(); //如果漏了，路由跳转过程会卡死
 })
 
-//单独引入vant-ui的一个组件
-import {
-  Toast
-} from "vant";
-Vue.use(Toast)
+
 
 //axios 全局拦截器
 //axios.intercetors 这是拦截器的设置
@@ -94,12 +103,7 @@ axios.interceptors.response.use(res => {
 
 Vue.config.productionTip = false;
 
-//全局引入vant库
-import Vant from "vant";
-//注册组件库
-Vue.use(Vant);
-//引入组件样式
-import "vant/lib/index.css";
+
 
 
 const app = new Vue({
