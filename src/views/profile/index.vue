@@ -110,7 +110,7 @@ export default {
     align-items: center;
     margin-right: 2.778vw;
     .iconjiantou1 {
-      color: #e4e4e4;
+      color: #aaaaaa;
       font-size: 3.889vw;
 
       // flex-direction:row;
