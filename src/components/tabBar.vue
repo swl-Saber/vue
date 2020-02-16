@@ -1,5 +1,5 @@
 <template>
-  <div class="tab">
+  <div class="tab" @click="clickDialog">
     <div class="left">{{tableft}}</div>
     <div class="right">{{tabright}}</div>
     <div class="arrow">
@@ -10,11 +10,16 @@
 
 <script>
 export default {
-  props: ["tableft", "tabright"]
+  props: ["tableft", "tabright"],
+  methods: {
+    clickDialog() {
+      this.$emit("handleClick");
+    }
+  }
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .tab {
   display: flex;
   padding: 5.556vw;
@@ -30,7 +35,10 @@ export default {
     padding-right: 1.389vw;
   }
   .arrow {
-    font-size: 3.889vw;
+    .iconjiantou1 {
+      font-size: 3.889vw;
+      color: #aaaaaa;
+    }
   }
 }
 </style>
