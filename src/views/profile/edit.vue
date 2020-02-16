@@ -10,11 +10,21 @@
     <tabbar v-if="userdata.gender==1" tableft="性别" tabright="男"></tabbar>
     <tabbar v-else tableft="性别" tabright="女"></tabbar>
     <!-- 昵称弹窗提示 -->
-    <van-dialog v-model="isShownickname" title="修改昵称" show-cancel-button @confirm="confirmNickname">
+    <van-dialog
+      v-model="isShownickname"
+      title="修改昵称"
+      show-cancel-button
+      @confirm="confirmData({nickname:nickname})"
+    >
       <van-field v-model="nickname" placeholder="请输入昵称" />
     </van-dialog>
     <!-- 密码弹窗提示 -->
-    <van-dialog v-model="isShowpassword" title="修改密码" show-cancel-button @confirm="confirmPassword">
+    <van-dialog
+      v-model="isShowpassword"
+      title="修改密码"
+      show-cancel-button
+      @confirm="confirmData({password:password})"
+    >
       <van-field v-model="password" type="password" placeholder="请输入密码" />
     </van-dialog>
   </div>
@@ -40,17 +50,17 @@ export default {
   },
 
   mounted() {
-    this.$axios({
-      url: "/user/" + localStorage.getItem("user_id"),
-      method: "get",
-      headers: {
-        Authorization: localStorage.getItem("token")
-      }
-    }).then(res => {
-      console.log(res.data);
-      const { data } = res.data;
-      this.userdata = data;
-    });
+    // this.$axios({
+    //   url: "/user/" + localStorage.getItem("user_id"),
+    //   method: "get",
+    //   headers: {
+    //     Authorization: localStorage.getItem("token")
+    //   }
+    // }).then(res => {
+    //   console.log(res.data);
+    //   const { data } = res.data;
+    //   this.userdata = data;
+    // });
     this.loadPage();
   },
   methods: {
@@ -66,40 +76,54 @@ export default {
         this.userdata = data;
       });
     },
-    confirmNickname() {
-      console.log("点击了确认" + this.nickname);
+    //封装修改用户信息函数
+    confirmData(newData) {
       this.$axios({
         url: "/user_update/" + localStorage.getItem("user_id"),
         method: "post",
-        data: {
-          nickname: this.nickname
-        },
+        data: newData,
         headers: {
           Authorization: localStorage.getItem("token")
         }
       }).then(res => {
         console.log(res);
-        //自动刷新数据
-        this.loadPage();
-      });
-    },
-    confirmPassword() {
-      console.log("点击了确认");
-      this.$axios({
-        url: "/user_update/" + localStorage.getItem("user_id"),
-        method: "post",
-        data: {
-          password: this.password
-        },
-        headers: {
-          Authorization: localStorage.getItem("token")
-        }
-      }).then(res => {
-        console.log(res);
-        //自动刷新数据
         this.loadPage();
       });
     }
+    // confirmNickname() {
+    //   console.log("点击了确认" + this.nickname);
+    //   this.$axios({
+    //     url: "/user_update/" + localStorage.getItem("user_id"),
+    //     method: "post",
+    //     data: {
+    //       nickname: this.nickname
+    //     },
+    //     headers: {
+    //       Authorization: localStorage.getItem("token")
+    //     }
+    //   }).then(res => {
+    //     console.log(res);
+    //     //自动刷新数据
+    //     this.loadPage();
+    //   });
+    // },
+    // confirmPassword() {
+    //   console.log("点击了确认");
+    //   this.$axios({
+    //     url: "/user_update/" + localStorage.getItem("user_id"),
+    //     method: "post",
+    //     data: {
+    //       password: this.password
+    //     },
+    //     headers: {
+    //       Authorization: localStorage.getItem("token")
+    //     }
+    //   }).then(res => {
+    //     console.log(res);
+    //     //自动刷新数据
+    //     this.loadPage();
+    //   });
+    // }
   }
 };
 </script>
