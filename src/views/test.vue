@@ -5,6 +5,8 @@
     :actions 是选项数组, 里面每一个元素都是选项的对象
     @select 是选择后的回调函数-->
     <van-action-sheet v-model="show" :actions="actions" cancel-text="取消" @select="onSelect"></van-action-sheet>
+    <!-- 测试文件上传组件 -->
+    <van-uploader :after-read="afterRead" />
   </div>
 </template>
 
@@ -27,6 +29,24 @@ export default {
   methods: {
     onSelect(item) {
       console.log(item);
+    },
+    afterRead(fileObj) {
+      // 我们的文件就在 fileObj.file 当中
+      //FormData对象用来把文件转换为二进制数据才能读取
+      const formData = new FormData();
+      formData.append("file", fileObj.file);
+      this.$axios({
+        url: "/upload",
+        method: "post",
+        data: formData,
+        headers: {
+          Authorization: localStorage.getItem("token")
+        }
+      }).then(res => {
+        console.log(res.data);
+        const { data } = res.data;
+        console.log(this.$axios.defaults.baseURL + data.url);
+      });
     }
   }
 };
