@@ -5,6 +5,7 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Profile from "../views/profile/index.vue"
 import Edit from "../views/profile/edit.vue"
+import Test from "../views/test.vue"
 Vue.use(VueRouter);
 
 const routes = [{
@@ -19,7 +20,8 @@ const routes = [{
   {
     path: "/register",
     component: Register
-  }, {
+  },
+  {
     //个人中心页
     path: "/profile",
     component: Profile
@@ -28,7 +30,11 @@ const routes = [{
     //编辑页面
     path: '/edit',
     component: Edit
-  }
+  },
+  {
+    path: "/test",
+    component: Test
+  },
 ];
 
 const router = new VueRouter({
