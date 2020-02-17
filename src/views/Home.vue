@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    这里是首页
-    <br />
-    <router-link to="./login">登录页</router-link>
+    <!-- <router-link to="./login">登录页</router-link>
     <br />
     <router-link to="./register">注册页</router-link>
     <br />
@@ -13,12 +11,17 @@
     <router-link to="./myfollow">我的关注</router-link>
     <br />
     <div @click="editlogin">退出登录</div>
-    <br />
+    <br />-->
+    <homeheader></homeheader>
   </div>
 </template>
 
 <script>
+import homeHeader from "@/components/homeHeader.vue";
 export default {
+  components: {
+    homeheader: homeHeader
+  },
   methods: {
     //退出登录
     editlogin() {
