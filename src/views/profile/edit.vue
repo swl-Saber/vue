@@ -4,6 +4,10 @@
     <div class="topImg">
       <img v-if="userdata.head_img" :src="$axios.defaults.baseURL+userdata.head_img" alt />
       <img v-else src="@/assets/timg.jpg" alt />
+      <!-- 上传图片文件 -->
+      <div class="uploader">
+        <van-uploader :after-read="afterRead" />
+      </div>
     </div>
     <tabbar tableft="昵称" :tabright="userdata.nickname" @handleClick="isShownickname=true"></tabbar>
     <tabbar tableft="密码" tabright="******" @handleClick="isShowpassword=true"></tabbar>
@@ -115,6 +119,25 @@ export default {
         gender: item.name == "男" ? 1 : 0
       });
       this.isShowgender = false;
+    },
+    afterRead(fileObj) {
+      //1. 将图片转换成二进制
+      const formData = new FormData();
+      formData.append("file", fileObj.file);
+      //2. 发送上传ajax请求
+      this.$axios({
+        url: "/upload",
+        method: "post",
+        data: formData,
+        headers: {
+          Authorization: localStorage.getItem("token")
+        }
+      }).then(res => {
+        console.log(res.data);
+        const { data } = res.data;
+        this.confirmData({ head_img: data.url });
+        this.loadPage();
+      });
     }
     // confirmNickname() {
     //   console.log("点击了确认" + this.nickname);
@@ -157,10 +180,17 @@ export default {
 <style lang="less" scoped>
 .topImg {
   text-align: center;
+  position: relative;
   img {
     width: 20vw;
     height: 20vw;
     border-radius: 50%;
+  }
+  .uploader {
+    position: absolute;
+    top: 15%;
+    left: 45%;
+    opacity: 0;
   }
 }
 </style>
