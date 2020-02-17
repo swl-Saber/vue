@@ -1,13 +1,18 @@
 <template>
   <div>
     <topnav title="我的关注"></topnav>
-    <div v-for="(item,index) of followList" :key="index" class="item">
-      <img :src="$axios.defaults.baseURL+item.head_img" alt />
-      <div class="mid">
-        <div class="name">{{item.nickname}}</div>
-        <div class="time">{{item.create_date.split('T')[0]}}</div>
+    <!-- 判断没有数据的时候 -->
+    <div v-if="followList.length>0" class="list">
+      <div v-for="(item,index) of followList" :key="index" class="item">
+        <!-- 判断数据库里是否有头像 -->
+        <img v-if="item.head_img" :src="$axios.defaults.baseURL+item.head_img" alt />
+        <img v-else src="@/assets/timg.jpg" alt />
+        <div class="mid">
+          <div class="name">{{item.nickname}}</div>
+          <div class="time">{{item.create_date.split('T')[0]}}</div>
+        </div>
+        <div class="follow">取消关注</div>
       </div>
-      <div class="follow">取消关注</div>
     </div>
   </div>
 </template>
