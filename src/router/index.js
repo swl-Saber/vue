@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
-import Profile from "../views/profile/index.vue"
+import Index from "../views/profile/index.vue"
 import Edit from "../views/profile/edit.vue"
 import Test from "../views/test.vue"
 import Myfollow from "../views/profile/myfollow.vue"
@@ -24,8 +24,8 @@ const routes = [{
   },
   {
     //个人中心页
-    path: "/profile",
-    component: Profile
+    path: "/index",
+    component: Index
   },
   {
     //编辑页面

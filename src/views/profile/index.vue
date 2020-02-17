@@ -7,8 +7,8 @@
         <img v-else src="@/assets/timg.jpg" class="pic" />
         <div class="profilemid">
           <div class="name">
-            <span v-if="userdata.gender==1" class="iconfont iconxingbienv"></span>
-            <span v-else class="iconfont iconxingbienan"></span>
+            <span v-if="userdata.gender==1" class="iconfont iconxingbienan"></span>
+            <span v-else class="iconfont iconxingbienv"></span>
             {{userdata.nickname}}
           </div>
           <div class="time">{{(userdata.create_date||'').split('T')[0]}}</div>
