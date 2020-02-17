@@ -13,12 +13,22 @@
     <div @click="editlogin">退出登录</div>
     <br />-->
     <homeheader></homeheader>
+    <!-- 引入vant-ui组件库的Tab标签页 -->
+    <van-tabs v-model="active">
+      <van-tab v-for="(item,index) of categoryList" :key="index" :title="item.name">内容 1</van-tab>
+    </van-tabs>
   </div>
 </template>
 
 <script>
 import homeHeader from "@/components/homeHeader.vue";
 export default {
+  data() {
+    return {
+      active: 0,
+      categoryList: []
+    };
+  },
   components: {
     homeheader: homeHeader
   },
@@ -29,6 +39,16 @@ export default {
       localStorage.removeItem("user_id");
       console.log("退出成功");
     }
+  },
+  mounted() {
+    this.$axios({
+      url: "/category",
+      method: "get"
+    }).then(res => {
+      console.log(res.data);
+      const { data } = res.data;
+      this.categoryList = data;
+    });
   }
 };
 </script>
