@@ -6,6 +6,7 @@ import Register from "../views/Register.vue";
 import Profile from "../views/profile/index.vue"
 import Edit from "../views/profile/edit.vue"
 import Test from "../views/test.vue"
+import Myfollow from "../views/profile/myfollow.vue"
 Vue.use(VueRouter);
 
 const routes = [{
@@ -32,9 +33,15 @@ const routes = [{
     component: Edit
   },
   {
+    //测试页面
     path: "/test",
     component: Test
   },
+  {
+    //我的关注页面
+    path: "/myfollow",
+    component: Myfollow
+  }
 ];
 
 const router = new VueRouter({

@@ -10,6 +10,8 @@
     <br />
     <router-link to="./edit">编辑资料</router-link>
     <br />
+    <router-link to="./myfollow">我的关注</router-link>
+    <br />
     <div @click="editlogin">退出登录</div>
     <br />
   </div>
