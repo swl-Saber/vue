@@ -1,11 +1,11 @@
 <template>
   <div>
     <topnav title="我的关注"></topnav>
-    <div class="item">
-      <img src="@/assets/timg.jpg" alt />
+    <div v-for="(item,index) of followList" :key="index" class="item">
+      <img :src="$axios.defaults.baseURL+item.head_img" alt />
       <div class="mid">
-        <div class="name">火星新闻播报</div>
-        <div class="time">2019-10-10</div>
+        <div class="name">{{item.nickname}}</div>
+        <div class="time">{{item.create_date.split('T')[0]}}</div>
       </div>
       <div class="follow">取消关注</div>
     </div>
@@ -15,8 +15,23 @@
 <script>
 import topNav from "@/components/topNav.vue";
 export default {
+  data() {
+    return {
+      followList: []
+    };
+  },
   components: {
     topnav: topNav
+  },
+  mounted() {
+    this.$axios({
+      url: "/user_follows",
+      method: "get"
+    }).then(res => {
+      console.log(res.data);
+      const { data } = res.data;
+      this.followList = data;
+    });
   }
 };
 </script>
