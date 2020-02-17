@@ -8,7 +8,9 @@
       搜索新闻
     </div>
     <div class="right">
-      <span class="iconfont iconwode"></span>
+      <router-link to="/index">
+        <span class="iconfont iconwode"></span>
+      </router-link>
     </div>
   </div>
 </template>
