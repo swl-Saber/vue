@@ -8,9 +8,12 @@
     <!-- 测试文件上传组件 -->
     <van-uploader :after-read="afterRead" />
     <!-- 测试关注功能 -->
-    <button @click="clickFollow(211)">用户1</button>
-    <button @click="clickFollow(221)">用户2</button>
-    <button @click="clickFollow(61)">用户3</button>
+    <button @click="clickFollow(1)">用户1</button>
+    <button @click="clickFollow(2)">用户2</button>
+    <button @click="clickFollow(3)">用户3</button>
+    <button @click="clickFollow(4)">用户4</button>
+    <button @click="clickFollow(5)">用户5</button>
+    <button @click="clickFollow(6)">用户6</button>
   </div>
 </template>
 
