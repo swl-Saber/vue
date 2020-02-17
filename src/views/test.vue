@@ -7,6 +7,10 @@
     <van-action-sheet v-model="show" :actions="actions" cancel-text="取消" @select="onSelect"></van-action-sheet>
     <!-- 测试文件上传组件 -->
     <van-uploader :after-read="afterRead" />
+    <!-- 测试关注功能 -->
+    <button @click="clickFollow(211)">用户1</button>
+    <button @click="clickFollow(221)">用户2</button>
+    <button @click="clickFollow(61)">用户3</button>
   </div>
 </template>
 
@@ -46,6 +50,15 @@ export default {
         console.log(res.data);
         const { data } = res.data;
         console.log(this.$axios.defaults.baseURL + data.url);
+      });
+    },
+    clickFollow(id) {
+      this.$axios({
+        url: "/user_follows/" + id,
+        method: "get"
+      }).then(res => {
+        console.log(res.data);
+        console.log(res.data.message);
       });
     }
   }
