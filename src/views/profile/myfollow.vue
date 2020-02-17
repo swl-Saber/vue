@@ -11,7 +11,7 @@
           <div class="name">{{item.nickname}}</div>
           <div class="time">{{item.create_date.split('T')[0]}}</div>
         </div>
-        <div class="follow">取消关注</div>
+        <div class="follow" @click="cancelFollow(item.id)">取消关注</div>
       </div>
     </div>
   </div>
@@ -29,14 +29,37 @@ export default {
     topnav: topNav
   },
   mounted() {
-    this.$axios({
-      url: "/user_follows",
-      method: "get"
-    }).then(res => {
-      console.log(res.data);
-      const { data } = res.data;
-      this.followList = data;
-    });
+    // this.$axios({
+    //   url: "/user_follows",
+    //   method: "get"
+    // }).then(res => {
+    //   console.log(res.data);
+    //   const { data } = res.data;
+    //   this.followList = data;
+    // });
+
+    this.loadPage(); // 进入页面直接刷新获取数据
+  },
+  methods: {
+    loadPage() {
+      this.$axios({
+        url: "/user_follows",
+        method: "get"
+      }).then(res => {
+        console.log(res.data);
+        const { data } = res.data;
+        this.followList = data;
+      });
+    },
+    cancelFollow(id) {
+      this.$axios({
+        url: "/user_unfollow/" + id,
+        method: "get"
+      }).then(res => {
+        console.log(res.data);
+        this.loadPage();
+      });
+    }
   }
 };
 </script>
