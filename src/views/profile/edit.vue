@@ -129,9 +129,7 @@ export default {
         url: "/upload",
         method: "post",
         data: formData,
-        headers: {
-          Authorization: localStorage.getItem("token")
-        }
+        
       }).then(res => {
         console.log(res.data);
         const { data } = res.data;

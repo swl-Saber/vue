@@ -99,6 +99,15 @@ axios.interceptors.response.use(res => {
   //最终必须return 你的res这样整个请求才能继续处理下去
   return res;
 })
+//全局拦截请求
+axios.interceptors.request.use(config => {
+  console.log('拦截了请求');
+  console.log(config)
+  if (!config.headers.Authorization && localStorage.getItem('token')) {
+    config.headers.Authorization = localStorage.getItem('token')
+  }
+  return config;
+})
 
 
 Vue.config.productionTip = false;
