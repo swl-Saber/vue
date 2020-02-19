@@ -109,7 +109,10 @@ export default {
 
         //以前是放在公共的this.posts
         //现在应该放在当前激活的栏目下的posts当中
-        activeCategory.posts = data;
+        // activeCategory.posts = data;
+        // 上面这种是旧数据替换新数据，翻页不能这么做
+        //新数据要和旧数据进行拼接，用扩展运算符
+        activeCategory.posts = [...activeCategory.posts, ...data];
       });
     },
     loadMorePost() {
@@ -117,6 +120,10 @@ export default {
       //需要将当前的栏目页面+1
       //调用this.getTabPost()发送ajax获取下一页数据
       console.log("触发加载更多");
+      // 1. 当前页面加1
+      const activeCategory = this.categoryList[this.active];
+      activeCategory.pageIndex++;
+      //2. 发送请求
       this.getTabPost();
     }
   }
