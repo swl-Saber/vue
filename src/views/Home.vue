@@ -10,8 +10,10 @@
           v-model="item.loading"
           :finished="item.finished"
           finished-text="没有更多了"
-          @load="onLoad"
+          @load="loadMorePost"
+          :immediate-check="false"
         >
+          <!-- :immediate-check="false用来进行第一次自动获取数据，只有真正拉到底才执行加载 -->
           <!-- 文章列表数据渲染 -->
           <!-- <div v-for="(item,index) of posts" :key="index">{{item.title}}</div> -->
           <post :post="item" v-for="(item,index) of item.posts" :key="index"></post>
@@ -109,6 +111,13 @@ export default {
         //现在应该放在当前激活的栏目下的posts当中
         activeCategory.posts = data;
       });
+    },
+    loadMorePost() {
+      //每次拉到底的时候，触发函数
+      //需要将当前的栏目页面+1
+      //调用this.getTabPost()发送ajax获取下一页数据
+      console.log("触发加载更多");
+      this.getTabPost();
     }
   }
 };
