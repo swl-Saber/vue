@@ -186,7 +186,7 @@ export default {
   }
   .uploader {
     position: absolute;
-    top: 15%;
+    top: 60%;
     left: 45%;
     opacity: 0;
   }
