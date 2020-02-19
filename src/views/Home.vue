@@ -66,9 +66,9 @@ export default {
         //需要分页
         element.pageSize = 5;
         element.pageIndex = 1;
-        //是否正在加载
+        //是否正在加载,拉到底的时候会触发loading事件自动变为true
         element.loading = false;
-        //是否已经加载到底了
+        //是否已经加载到底了,若数据加载完毕，要手动设置finished为false
         element.finished = false;
       });
       return data;
@@ -113,6 +113,14 @@ export default {
         // 上面这种是旧数据替换新数据，翻页不能这么做
         //新数据要和旧数据进行拼接，用扩展运算符
         activeCategory.posts = [...activeCategory.posts, ...data];
+        //加载完毕，因为是异步获取数据，组件不知道什么时候才算加载完
+        //所以会一直显示加载中，需要手动设置当前的栏目的loading为false
+        activeCategory.loading = false;
+        //当底部数据加载完毕
+        //当拿到的data长度已经比设定的页面数据程度小的时候，就知道数据拿光了
+        if (data.length < activeCategory.pageSize) {
+          activeCategory.finished = true;
+        }
       });
     },
     loadMorePost() {
