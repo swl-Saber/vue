@@ -15,8 +15,13 @@ export default {
 
 <style lang="less" scoped>
 .nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   padding: 4.167vw;
+  background-color: rgba(255, 255, 255, 0.6);
   .arrow {
     .iconjiantou2 {
       color: #979494;
@@ -27,7 +32,7 @@ export default {
     flex: 1;
     text-align: center;
     font-size: 4.444vw;
-    padding-right: 2.778vw;
+    padding-right: 6.944vw;
   }
 }
 </style>
