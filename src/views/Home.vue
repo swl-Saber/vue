@@ -6,7 +6,12 @@
       <!-- 栏目渲染 -->
       <van-tab v-for="(item,index) of categoryList" :key="index" :title="item.name">
         <!-- 插入vant的list列表 -->
-        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+        <van-list
+          v-model="item.loading"
+          :finished="item.finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+        >
           <!-- 文章列表数据渲染 -->
           <!-- <div v-for="(item,index) of posts" :key="index">{{item.title}}</div> -->
           <post :post="item" v-for="(item,index) of item.posts" :key="index"></post>
@@ -59,6 +64,10 @@ export default {
         //需要分页
         element.pageSize = 5;
         element.pageIndex = 1;
+        //是否正在加载
+        element.loading = false;
+        //是否已经加载到底了
+        element.finished = false;
       });
       return data;
     },
