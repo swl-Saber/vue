@@ -36,7 +36,13 @@ export default {
       console.log("切换了栏目");
       // const currentCategory = this.categoryList[newVal];
       // console.log(currentCategory);
-      this.getTabPost();
+      // 获取当前激活的category栏目
+      const activeCategory = this.categoryList[this.active];
+      //如果当前栏目的posts长度大于零证明有数据不需要获取
+      //只有在等于零的时候采取执行获取
+      if (activeCategory.posts.length == 0) {
+        this.getTabPost();
+      }
     }
   },
   mounted() {
@@ -81,6 +87,7 @@ export default {
         const { data } = res.data;
         console.log(data);
         // this.posts = data;
+
         //以前是放在公共的this.posts
         //现在应该放在当前激活的栏目下的posts当中
         activeCategory.posts = data;
