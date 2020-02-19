@@ -7,7 +7,7 @@
       <van-tab v-for="(item,index) of categoryList" :key="index" :title="item.name">
         <!-- 文章列表数据渲染 -->
         <!-- <div v-for="(item,index) of posts" :key="index">{{item.title}}</div> -->
-        <post :post="item" v-for="(item,index) of posts" :key="index"></post>
+        <post :post="item" v-for="(item,index) of item.posts" :key="index"></post>
       </van-tab>
     </van-tabs>
   </div>
@@ -20,8 +20,10 @@ export default {
   data() {
     return {
       active: 0,
-      categoryList: [],
-      posts: []
+      categoryList: []
+      //不可能每个栏目创建一个posts放在data不好管理
+      // posts: []
+      //现在是categoryList里面的栏目自带posts字段进行文章管理
     };
   },
 
@@ -46,6 +48,7 @@ export default {
         //往data里添加一个posts属性
         element.posts = [];
       });
+      return data;
     },
     //获取栏目
     getCategory() {
@@ -58,6 +61,8 @@ export default {
         // this.categoryList = data;
         //现在不是直接赋值而是先经过一道函数处理
         this.categoryList = this.initCategoryData(data);
+        console.log(this.categoryList);
+
         // 加载完栏目数据的时候
         //马上加载第一批文章数据
         this.getTabPost();
@@ -75,7 +80,10 @@ export default {
       }).then(res => {
         const { data } = res.data;
         console.log(data);
-        this.posts = data;
+        // this.posts = data;
+        //以前是放在公共的this.posts
+        //现在应该放在当前激活的栏目下的posts当中
+        activeCategory.posts = data;
       });
     }
   }
