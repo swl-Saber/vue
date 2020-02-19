@@ -1,24 +1,13 @@
 <template>
   <div class="home">
-    <!-- <router-link to="./login">登录页</router-link>
-    <br />
-    <router-link to="./register">注册页</router-link>
-    <br />
-    <router-link to="./profile">个人中心</router-link>
-    <br />
-    <router-link to="./edit">编辑资料</router-link>
-    <br />
-    <router-link to="./myfollow">我的关注</router-link>
-    <br />
-    <div @click="editlogin">退出登录</div>
-    <br />-->
     <homeheader></homeheader>
     <!-- 引入vant-ui组件库的Tab标签页 -->
     <van-tabs v-model="active">
+      <!-- 栏目渲染 -->
       <van-tab v-for="(item,index) of categoryList" :key="index" :title="item.name">
-        <div v-for="(item,index) of posts" :key="index">
-          {{item.title}}
-          </div>
+        <!-- 文章列表数据渲染 -->
+        <!-- <div v-for="(item,index) of posts" :key="index">{{item.title}}</div> -->
+        <post :post="item" v-for="(item,index) of posts" :key="index"></post>
       </van-tab>
     </van-tabs>
   </div>
@@ -26,6 +15,7 @@
 
 <script>
 import homeHeader from "@/components/homeHeader.vue";
+import Post from "@/components/post.vue";
 export default {
   data() {
     return {
@@ -34,8 +24,10 @@ export default {
       posts: []
     };
   },
+
   components: {
-    homeheader: homeHeader
+    homeheader: homeHeader,
+    post: Post
   },
   watch: {
     active(newVal) {
@@ -49,6 +41,7 @@ export default {
     this.getCategory();
   },
   methods: {
+    //获取栏目
     getCategory() {
       this.$axios({
         url: "/category",
