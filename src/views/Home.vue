@@ -5,9 +5,12 @@
     <van-tabs v-model="active">
       <!-- 栏目渲染 -->
       <van-tab v-for="(item,index) of categoryList" :key="index" :title="item.name">
-        <!-- 文章列表数据渲染 -->
-        <!-- <div v-for="(item,index) of posts" :key="index">{{item.title}}</div> -->
-        <post :post="item" v-for="(item,index) of item.posts" :key="index"></post>
+        <!-- 插入vant的list列表 -->
+        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+          <!-- 文章列表数据渲染 -->
+          <!-- <div v-for="(item,index) of posts" :key="index">{{item.title}}</div> -->
+          <post :post="item" v-for="(item,index) of item.posts" :key="index"></post>
+        </van-list>
       </van-tab>
     </van-tabs>
   </div>
@@ -53,6 +56,9 @@ export default {
       data.forEach(element => {
         //往data里添加一个posts属性
         element.posts = [];
+        //需要分页
+        element.pageSize = 5;
+        element.pageIndex = 1;
       });
       return data;
     },
@@ -81,7 +87,9 @@ export default {
         url: "/post",
         method: "get",
         params: {
-          category: activeCategory.id
+          category: activeCategory.id,
+          pageSize: activeCategory.pageSize,
+          pageIndex: activeCategory.pageIndex
         }
       }).then(res => {
         const { data } = res.data;
