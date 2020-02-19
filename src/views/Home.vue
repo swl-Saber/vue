@@ -41,6 +41,12 @@ export default {
     this.getCategory();
   },
   methods: {
+    initCategoryData(data) {
+      data.forEach(element => {
+        //往data里添加一个posts属性
+        element.posts = [];
+      });
+    },
     //获取栏目
     getCategory() {
       this.$axios({
@@ -49,7 +55,9 @@ export default {
       }).then(res => {
         console.log(res.data);
         const { data } = res.data;
-        this.categoryList = data;
+        // this.categoryList = data;
+        //现在不是直接赋值而是先经过一道函数处理
+        this.categoryList = this.initCategoryData(data);
         // 加载完栏目数据的时候
         //马上加载第一批文章数据
         this.getTabPost();
