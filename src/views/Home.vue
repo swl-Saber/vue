@@ -132,7 +132,10 @@ export default {
       const activeCategory = this.categoryList[this.active];
       activeCategory.pageIndex++;
       //2. 发送请求
-      this.getTabPost();
+      //人工延迟，方便看效果
+      setTimeout(() => {
+        this.getTabPost();
+      }, 2000);
     }
   }
 };
