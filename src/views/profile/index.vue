@@ -78,6 +78,7 @@ export default {
   border-bottom: 5px solid #eee;
   .pic {
     width: 20vw;
+    object-fit: cover;
     border-radius: 50%;
     margin-left: 6.944vw;
   }

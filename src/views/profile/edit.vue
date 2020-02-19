@@ -128,8 +128,7 @@ export default {
       this.$axios({
         url: "/upload",
         method: "post",
-        data: formData,
-        
+        data: formData
       }).then(res => {
         console.log(res.data);
         const { data } = res.data;
@@ -182,6 +181,7 @@ export default {
   img {
     width: 20vw;
     height: 20vw;
+    object-fit: cover;
     border-radius: 50%;
   }
   .uploader {

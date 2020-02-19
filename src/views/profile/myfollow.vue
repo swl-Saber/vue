@@ -72,6 +72,7 @@ export default {
   img {
     width: 20vw;
     height: 20vw;
+    object-fit: cover;
     border-radius: 50%;
     margin: 2.778vw;
   }
