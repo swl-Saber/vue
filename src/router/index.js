@@ -8,6 +8,7 @@ import Edit from "../views/profile/edit.vue"
 import Test from "../views/test.vue"
 import Myfollow from "../views/profile/myfollow.vue"
 import Collections from "../views/profile/collections.vue"
+import PostDetail from "../views/PostDetail.vue"
 Vue.use(VueRouter);
 
 const routes = [{
@@ -45,8 +46,13 @@ const routes = [{
   },
   {
     //我的收藏页面
-    path: "/colloections",
+    path: "/collections",
     component: Collections
+  },
+  {
+    //文章详情页
+    path: "/postdetail",
+    component: PostDetail
   }
 ];
 
