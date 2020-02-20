@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <!-- 我们可以通过post.id获取当前文章id，传给详情页 -->
+  <div @click="$router.push({path:'/postdetail?id='+post.id})">
     <!-- 显示一张图片的普通文章 -->
     <div class="OneImg" v-if="post.type==1&&post.cover.length<3">
       <div class="left">
