@@ -21,7 +21,7 @@
     <div class="btnlist">
       <tabbar tableft="我的关注" tabright="关注的用户"></tabbar>
       <tabbar tableft="我的跟帖" tabright="跟帖/回复"></tabbar>
-      <tabbar tableft="我的收藏" tabright="文章/视频"></tabbar>
+      <tabbar tableft="我的收藏" tabright="文章/视频" @handleClick="goCollections"></tabbar>
       <tabbar tableft="设置"></tabbar>
       <button class="esc" @click="logout">退出登录</button>
     </div>
@@ -44,6 +44,11 @@ export default {
       this.$router.replace({
         path: "/login"
       });
+    },
+    goCollections(){
+      this.$router.push({
+        path:"/collections"
+      })
     }
   },
   data() {

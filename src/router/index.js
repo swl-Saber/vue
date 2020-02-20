@@ -7,6 +7,7 @@ import Index from "../views/profile/index.vue"
 import Edit from "../views/profile/edit.vue"
 import Test from "../views/test.vue"
 import Myfollow from "../views/profile/myfollow.vue"
+import Collections from "../views/profile/collections.vue"
 Vue.use(VueRouter);
 
 const routes = [{
@@ -41,6 +42,11 @@ const routes = [{
     //我的关注页面
     path: "/myfollow",
     component: Myfollow
+  },
+  {
+    //我的收藏页面
+    path: "/colloections",
+    component: Collections
   }
 ];
 
