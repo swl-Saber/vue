@@ -2,7 +2,7 @@
   <div class="home">
     <homeheader></homeheader>
     <!-- 引入vant-ui组件库的Tab标签页 -->
-    <van-tabs v-model="active">
+    <van-tabs v-model="active" sticky>
       <!-- 栏目渲染 -->
       <van-tab v-for="(item,index) of categoryList" :key="index" :title="item.name">
         <!-- 插入vant的list列表 -->
