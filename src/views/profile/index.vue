@@ -19,7 +19,7 @@
       </div>
     </router-link>
     <div class="btnlist">
-      <tabbar tableft="我的关注" tabright="关注的用户"></tabbar>
+      <tabbar tableft="我的关注" tabright="关注的用户" @handleClick="goMyfollow"></tabbar>
       <tabbar tableft="我的跟帖" tabright="跟帖/回复"></tabbar>
       <tabbar tableft="我的收藏" tabright="文章/视频" @handleClick="goCollections"></tabbar>
       <tabbar tableft="设置"></tabbar>
@@ -45,10 +45,15 @@ export default {
         path: "/login"
       });
     },
-    goCollections(){
+    goCollections() {
       this.$router.push({
-        path:"/collections"
-      })
+        path: "/collections"
+      });
+    },
+    goMyfollow() {
+      this.$router.push({
+        path: "/myfollow"
+      });
     }
   },
   data() {
