@@ -1,6 +1,15 @@
 <template>
   <div>
-    <div class="videoPost" v-if="postDetail.type&&postDetail.type==2">这里是视频文章</div>
+    <div class="videoPost" v-if="postDetail.type&&postDetail.type==2">
+      <div class="info">
+        <div class="left">
+          <img class="pic" :src="$axios.defaults.baseURL+postDetail.user.head_img" alt />
+          <div class="name">{{postDetail.user.nickname}}</div>
+        </div>
+        <div class="btnfollow">关注</div>
+      </div>
+      <div class="title">{{postDetail.title}}</div>
+    </div>
     <div class="normalPost" v-else-if="postDetail.type&&postDetail.type==1">
       <div class="topnav">
         <div class="left">
@@ -75,7 +84,7 @@ export default {
     }
     .right {
       border: 1px solid rgb(161, 161, 161);
-      padding: 0.833vw 3.333vw;
+      padding: 0.833vw 5vw;
       border-radius: 4.167vw;
       font-size: 3.889vw;
     }
@@ -155,6 +164,43 @@ export default {
       margin-right: 1.389vw;
       font-size: 3.333vw;
     }
+  }
+}
+.videoPost {
+  margin-left: 5.556vw;
+  margin-right: 5.556vw;
+  .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .pic {
+        width: 6.944vw;
+        height: 6.944vw;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-right: 1.389vw;
+      }
+      .name {
+        font-size: 3.611vw;
+        color: rgb(122, 122, 122);
+      }
+    }
+    .btnfollow {
+      border: 1px solid rgb(161, 161, 161);
+      padding: 0.833vw 5vw;
+      border-radius: 4.167vw;
+      font-size: 3.889vw;
+    }
+  }
+  .title {
+    font-size: 5.556vw;
+    font-weight: bold;
+    margin-bottom: 1.389vw;
+    margin-top: 4.167vw;
   }
 }
 </style>
