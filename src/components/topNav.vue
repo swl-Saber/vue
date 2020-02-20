@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-    <div class="arrow">
+    <div class="arrow" @click="backPage">
       <span class="iconfont iconjiantou2"></span>
     </div>
     <div class="title">{{title}}</div>
@@ -9,7 +9,12 @@
 
 <script>
 export default {
-  props: ["title"]
+  props: ["title"],
+  methods: {
+    backPage() {
+      this.$router.back();
+    }
+  }
 };
 </script>
 
@@ -22,7 +27,11 @@ export default {
   display: flex;
   padding: 4.167vw;
   background-color: rgba(255, 255, 255, 0.6);
+  z-index: 1;
   .arrow {
+    width: 20px;
+    height: 20px;
+
     .iconjiantou2 {
       color: #979494;
       font-size: 3.889vw;
