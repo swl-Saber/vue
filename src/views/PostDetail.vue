@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 视频文章 -->
     <div class="videoPost" v-if="postDetail.type&&postDetail.type==2">
       <!-- 这个 video 标签接受一些属性, 其中控制是否显示播放按钮的属性是:controls -->
       <!-- poster可以添加图片在视频封面 -->
@@ -13,17 +14,25 @@
           <img class="pic" :src="$axios.defaults.baseURL+postDetail.user.head_img" alt />
           <div class="name">{{postDetail.user.nickname}}</div>
         </div>
-        <div class="btnfollow">关注</div>
+        <div
+          class="btnfollow"
+          :class="{hasFollow:postDetail.has_follow}"
+        >{{postDetail.has_follow?" ✔ 已关注":"＋ 关注"}}</div>
       </div>
       <div class="title">{{postDetail.title}}</div>
     </div>
+    <!-- 普通文章 -->
     <div class="normalPost" v-else-if="postDetail.type&&postDetail.type==1">
       <div class="topnav">
         <div class="left">
           <span class="iconfont iconjiantou2"></span>
           <span class="iconfont iconnew"></span>
         </div>
-        <div class="right">已关注</div>
+        <div
+          class="right"
+          :class="{hasFollow:postDetail.has_follow}"
+          @click="clickFollow"
+        >{{postDetail.has_follow?" ✔ 已关注":"＋ 关注"}}</div>
       </div>
       <div class="title">{{postDetail.title}}</div>
       <div class="info">
@@ -64,6 +73,32 @@ export default {
         const { data } = res.data;
         this.postDetail = data;
       });
+    },
+    clickFollow() {
+      // 如果为true就执行，ajax发送取消关注的请求
+      if (this.postDetail.has_follow) {
+        this.$axios({
+          url: "/user_unfollow/" + this.$route.query.id,
+          method: "get"
+        }).then(res => {
+          console.log(res);
+          const { message } = res.data;
+          if (message == "取消关注成功") {
+            this.postDetail.has_follow = false;
+          }
+        });
+      } else {
+        this.$axios({
+          url: "/user_follows/" + this.$route.query.id,
+          method: "get"
+        }).then(res => {
+          console.log(res);
+          const { message } = res.data;
+          if (message == "关注成功") {
+            this.postDetail.has_follow = true;
+          }
+        });
+      }
     }
   }
 };
@@ -90,10 +125,15 @@ export default {
       }
     }
     .right {
-      border: 1px solid rgb(161, 161, 161);
+      border: 1px solid rgb(255, 81, 0);
+      color: rgb(255, 81, 0);
       padding: 0.833vw 5vw;
       border-radius: 4.167vw;
       font-size: 3.889vw;
+      &.hasFollow {
+        color: rgb(53, 53, 53);
+        border: 1px solid rgb(141, 141, 141);
+      }
     }
   }
   .title {
@@ -201,10 +241,15 @@ export default {
       }
     }
     .btnfollow {
-      border: 1px solid rgb(161, 161, 161);
+      border: 1px solid rgb(255, 81, 0);
+      color: rgb(255, 81, 0);
       padding: 0.833vw 5vw;
       border-radius: 4.167vw;
       font-size: 3.889vw;
+      &.hasFollow {
+        color: rgb(53, 53, 53);
+        border: 1px solid rgb(141, 141, 141);
+      }
     }
   }
   .title {
