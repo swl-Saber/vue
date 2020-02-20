@@ -16,6 +16,15 @@
       </div>
       <div class="maincontent" v-html="postDetail.content"></div>
     </div>
+    <!-- 这里写公共的部件，比如按钮 -->
+    <div class="btnWrapper">
+      <div class="btnLike">
+        <span class="iconfont icondianzan"></span>112
+      </div>
+      <div class="btnWx">
+        <span class="iconfont iconweixin"></span>微信
+      </div>
+    </div>
   </div>
 </template>
 
@@ -114,6 +123,37 @@ export default {
           font-size: 2.778vw;
         }
       }
+    }
+  }
+}
+.btnWrapper {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 5.556vw;
+  margin-top: 5.556vw;
+  .btnLike {
+    border: 1px solid rgb(161, 161, 161);
+    border-radius: 4.167vw;
+    padding: 0.833vw 3.889vw;
+    font-size: 3.333vw;
+    height: 5.556vw;
+    line-height: 5.556vw;
+    .icondianzan {
+      margin-right: 1.389vw;
+      font-size: 3.333vw;
+    }
+  }
+  .btnWx {
+    border: 1px solid rgb(161, 161, 161);
+    border-radius: 4.167vw;
+    padding: 0.833vw 3.889vw;
+    font-size: 3.333vw;
+    height: 5.556vw;
+    line-height: 5.556vw;
+    .iconweixin {
+      color: #00c000;
+      margin-right: 1.389vw;
+      font-size: 3.333vw;
     }
   }
 }
