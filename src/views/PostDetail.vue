@@ -1,6 +1,13 @@
 <template>
   <div>
     <div class="videoPost" v-if="postDetail.type&&postDetail.type==2">
+      <!-- 这个 video 标签接受一些属性, 其中控制是否显示播放按钮的属性是:controls -->
+      <!-- poster可以添加图片在视频封面 -->
+      <video
+        src="https://video.pearvideo.com/mp4/adshort/20200219/cont-1632418-14924288_adpkg-ad_hd.mp4"
+        poster="https://timgmb04.bdimg.com/timg?searchbox_feed&quality=100&wh_rate=0&size=b576_324&ref=http%3A%2F%2Fwww.baidu.com&sec=1568739067&di=612dd27cae470b93b01a4b32ef72fbac&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2Fe18c6ffa079441431f8988ca4c3ac106.jpeg"
+        controls
+      ></video>
       <div class="info">
         <div class="left">
           <img class="pic" :src="$axios.defaults.baseURL+postDetail.user.head_img" alt />
@@ -169,6 +176,10 @@ export default {
 .videoPost {
   margin-left: 5.556vw;
   margin-right: 5.556vw;
+  video {
+    max-width: 100%;
+    padding: 4.167vw 0;
+  }
   .info {
     display: flex;
     justify-content: space-between;
