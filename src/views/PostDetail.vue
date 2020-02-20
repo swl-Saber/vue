@@ -1,9 +1,31 @@
 <template>
-  <div>文章详情</div>
+  <div>
+    <div class="videoPost" v-if="postDetail.type&&postDetail.type==2">这里是视频文章</div>
+    <div class="normalPost" v-else-if="postDetail.type&&postDetail.type==1">
+      <div class="topnav">
+        <div class="left">
+          <span class="iconfont iconjiantou2"></span>
+          <span class="iconfont iconnew"></span>
+        </div>
+        <div class="right">已关注</div>
+      </div>
+      <div class="title">{{postDetail.title}}</div>
+      <div class="info">
+        <div class="name">{{postDetail.user.nickname}}</div>
+        <div class="time">{{postDetail.user.create_date.split("T")[0]}}</div>
+      </div>
+      <div class="maincontent" v-html="postDetail.content"></div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      postDetail: {}
+    };
+  },
   mounted() {
     this.loadPage();
   },
@@ -14,11 +36,85 @@ export default {
         method: "get"
       }).then(res => {
         console.log(res.data);
+        const { data } = res.data;
+        this.postDetail = data;
       });
     }
   }
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+.normalPost {
+  margin-left: 5.556vw;
+  margin-right: 5.556vw;
+  .topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .iconjiantou2 {
+        font-size: 4.167vw;
+      }
+      .iconnew {
+        font-size: 15vw;
+        color: rgb(252, 98, 124);
+      }
+    }
+    .right {
+      border: 1px solid rgb(161, 161, 161);
+      padding: 0.833vw 3.333vw;
+      border-radius: 4.167vw;
+      font-size: 3.889vw;
+    }
+  }
+  .title {
+    font-size: 5.556vw;
+    font-weight: bold;
+    margin-bottom: 1.389vw;
+  }
+  .info {
+    display: flex;
+    margin-bottom: 5.556vw;
+    .name {
+      font-size: 3.611vw;
+      color: rgb(122, 122, 122);
+    }
+    .time {
+      margin-left: 2.778vw;
+      font-size: 3.611vw;
+      color: rgb(122, 122, 122);
+    }
+  }
+  .maincontent {
+    /deep/ .content {
+      .photo {
+        margin-right: 4.167vw;
+        a {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          span {
+            font-size: 2.778vw;
+            margin: 2.778vw 0;
+          }
+        }
+      }
+      p {
+        font-size: 3.611vw;
+        padding: 2.778vw 0;
+      }
+      .otitle_editor {
+        color: rgb(122, 122, 122);
+        p {
+          font-size: 2.778vw;
+        }
+      }
+    }
+  }
+}
 </style>
