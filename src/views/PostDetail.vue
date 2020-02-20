@@ -2,6 +2,12 @@
   <div>
     <!-- 视频文章 -->
     <div class="videoPost" v-if="postDetail.type&&postDetail.type==2">
+      <div class="topnav">
+        <div class="left">
+          <span class="iconfont iconjiantou2" @click="gobackpage"></span>
+          <span class="iconfont iconnew"></span>
+        </div>
+      </div>
       <!-- 这个 video 标签接受一些属性, 其中控制是否显示播放按钮的属性是:controls -->
       <!-- poster可以添加图片在视频封面 -->
       <video
@@ -17,7 +23,8 @@
         <div
           class="btnfollow"
           :class="{hasFollow:postDetail.has_follow}"
-        >{{postDetail.has_follow?" ✔ 已关注":"＋ 关注"}}</div>
+          @click="clickFollow"
+        >{{postDetail.has_follow? " ✔ 已关注":"＋ 关注"}}</div>
       </div>
       <div class="title">{{postDetail.title}}</div>
     </div>
@@ -25,7 +32,7 @@
     <div class="normalPost" v-else-if="postDetail.type&&postDetail.type==1">
       <div class="topnav">
         <div class="left">
-          <span class="iconfont iconjiantou2"></span>
+          <span class="iconfont iconjiantou2" @click="gobackpage"></span>
           <span class="iconfont iconnew"></span>
         </div>
         <div
@@ -43,8 +50,9 @@
     </div>
     <!-- 这里写公共的部件，比如按钮 -->
     <div class="btnWrapper">
-      <div class="btnLike">
-        <span class="iconfont icondianzan"></span>112
+      <div class="btnLike" @click="clickLike">
+        <span class="iconfont icondianzan"></span>
+        {{postDetail.like_length}}
       </div>
       <div class="btnWx">
         <span class="iconfont iconweixin"></span>微信
@@ -78,7 +86,7 @@ export default {
       // 如果为true就执行，ajax发送取消关注的请求
       if (this.postDetail.has_follow) {
         this.$axios({
-          url: "/user_unfollow/" + this.$route.query.id,
+          url: "/user_unfollow/" + this.postDetail.user.id,
           method: "get"
         }).then(res => {
           console.log(res);
@@ -89,7 +97,7 @@ export default {
         });
       } else {
         this.$axios({
-          url: "/user_follows/" + this.$route.query.id,
+          url: "/user_follows/" + this.postDetail.user.id,
           method: "get"
         }).then(res => {
           console.log(res);
@@ -99,6 +107,23 @@ export default {
           }
         });
       }
+    },
+    clickLike() {
+      this.$axios({
+        url: "/post_like/" + this.$route.query.id,
+        method: "get"
+      }).then(res => {
+        console.log(res);
+        const { message } = res.data;
+        if (message == "点赞成功") {
+          this.postDetail.like_length++;
+        } else {
+          this.postDetail.like_length--;
+        }
+      });
+    },
+    gobackpage() {
+      this.$router.back();
     }
   }
 };
@@ -216,9 +241,26 @@ export default {
 .videoPost {
   margin-left: 5.556vw;
   margin-right: 5.556vw;
+  .topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .iconjiantou2 {
+        font-size: 4.167vw;
+      }
+      .iconnew {
+        font-size: 15vw;
+        color: rgb(252, 98, 124);
+      }
+    }
+  }
   video {
     max-width: 100%;
-    padding: 4.167vw 0;
+    padding: 0 0 4.167vw;
   }
   .info {
     display: flex;
