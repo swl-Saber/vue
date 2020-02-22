@@ -66,11 +66,14 @@
     <div class="btnWrapper">
       <div class="btnMore" @click="$router.push({path:'/morecomment?id='+$route.query.id})">更多跟帖</div>
     </div>
+    <!-- 这里插入回帖组件 -->
+    <commentinput></commentinput>
   </div>
 </template>
 
 <script>
 import Comment from "@/components/comment/comment.vue";
+import CommentInput from "@/components/commentInput.vue";
 export default {
   data() {
     return {
@@ -83,7 +86,8 @@ export default {
     this.loadComment();
   },
   components: {
-    comment: Comment
+    comment: Comment,
+    commentinput: CommentInput
   },
   methods: {
     loadPage() {
