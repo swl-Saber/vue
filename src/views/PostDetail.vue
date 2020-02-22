@@ -103,6 +103,10 @@ export default {
       }).then(res => {
         console.log(res.data);
         const { data } = res.data;
+        //这里设置返回的评论只显示3条
+        if (data.length > 3) {
+          data.length = 3;
+        }
         this.comments = data;
       });
     },
