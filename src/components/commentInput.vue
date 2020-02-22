@@ -12,7 +12,7 @@
     </div>
     <!-- 这里是已激活的状态 -->
     <div class="enable" v-else-if="!isShow">
-      <textarea rows="5" @blur="isShowDisable">回复xxx</textarea>
+      <textarea rows="5" @blur="isShowDisable" ref="textareaDom">回复xxx</textarea>
       <div class="btnSend">发送</div>
     </div>
   </div>
@@ -26,9 +26,15 @@ export default {
     };
   },
   methods: {
+    // 获取焦点切换已激活状态
     isShowEnable() {
       this.isShow = false;
+      //延迟执行焦点消失
+      this.$nextTick(() => {
+        this.$refs.textareaDom.focus();
+      });
     },
+    //失去焦点切换未激活状态
     isShowDisable() {
       this.isShow = true;
     }
