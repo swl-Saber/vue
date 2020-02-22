@@ -74,6 +74,7 @@ export default {};
     outline: none;
     border-radius: 2.778vw;
     padding: 2.778vw 4.723vw;
+    resize: none;
   }
   .btnSend {
     color: #fff;
