@@ -3,7 +3,7 @@
     <div class="infoWrapper">
       <img
         v-if="comment.user.head_img"
-        :src="comment.user.head_img+$axios.defaults.baseURL"
+        :src="$axios.defaults.baseURL+comment.user.head_img"
         alt
         class="pic"
       />
