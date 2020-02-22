@@ -58,16 +58,18 @@
         <span class="iconfont iconweixin"></span>微信
       </div>
     </div>
-    <!-- 水平线 -->
-    <div class="line">精彩跟帖</div>
-    <!-- 这里写评论 -->
-    <comment :comment="item" v-for="(item,index) of comments" :key="index"></comment>
-    <!-- 更多跟帖 -->
-    <div class="btnWrapper">
-      <div class="btnMore" @click="$router.push({path:'/morecomment?id='+$route.query.id})">更多跟帖</div>
+    <div class="commentList">
+      <!-- 水平线 -->
+      <div class="line">精彩跟帖</div>
+      <!-- 这里写评论 -->
+      <comment :comment="item" v-for="(item,index) of comments" :key="index"></comment>
+      <!-- 更多跟帖 -->
+      <div class="btnWrapper">
+        <div class="btnMore" @click="$router.push({path:'/morecomment?id='+$route.query.id})">更多跟帖</div>
+      </div>
+      <!-- 这里插入回帖组件 -->
+      <commentinput></commentinput>
     </div>
-    <!-- 这里插入回帖组件 -->
-    <commentinput></commentinput>
   </div>
 </template>
 
@@ -333,20 +335,24 @@ export default {
     }
   }
 }
-.line {
-  text-align: center;
-  font-size: 4.444vw;
-  border-top: 5px solid #ccc;
-  padding-top: 6.944vw;
-}
-.btnWrapper {
-  padding: 6.944vw 0;
-  .btnMore {
+.commentList {
+  padding-bottom: 16.667vw;
+  .line {
     text-align: center;
-    font-size: 3.611vw;
-    border: 1px solid rgb(110, 110, 110);
-    padding: 1.389vw 8.333vw;
-    border-radius: 4.167vw;
+    font-size: 4.444vw;
+    border-top: 5px solid #ccc;
+    padding-top: 6.944vw;
+  }
+  .btnWrapper {
+    padding: 6.944vw 0;
+    margin-top: 0;
+    .btnMore {
+      text-align: center;
+      font-size: 3.611vw;
+      border: 1px solid rgb(110, 110, 110);
+      padding: 1.389vw 8.333vw;
+      border-radius: 4.167vw;
+    }
   }
 }
 </style>
