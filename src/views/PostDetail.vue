@@ -62,7 +62,10 @@
       <!-- 水平线 -->
       <div class="line">精彩跟帖</div>
       <!-- 这里写评论 -->
-      <comment :comment="item" v-for="(item,index) of comments" :key="index"></comment>
+      <div v-if="comments.item">
+        <comment :comment="item" v-for="(item,index) of comments" :key="index"></comment>
+      </div>
+      <div class="unComment" v-else>暂无跟帖，请抢占沙发</div>
       <!-- 更多跟帖 -->
       <div class="btnWrapper">
         <div class="btnMore" @click="$router.push({path:'/morecomment?id='+$route.query.id})">更多跟帖</div>
@@ -342,6 +345,13 @@ export default {
     font-size: 4.444vw;
     border-top: 5px solid #ccc;
     padding-top: 6.944vw;
+  }
+  .unComment {
+    text-align: center;
+    font-size: 3.611vw;
+    margin-top: 5.556vw;
+    margin-bottom: 11.111vw;
+    color: rgb(83, 83, 83);
   }
   .btnWrapper {
     padding: 6.944vw 0;
