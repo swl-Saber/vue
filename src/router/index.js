@@ -9,6 +9,7 @@ import Test from "../views/test.vue"
 import Myfollow from "../views/profile/myfollow.vue"
 import Collections from "../views/profile/collections.vue"
 import PostDetail from "../views/PostDetail.vue"
+import MoreComment from "../views/MoreComment.vue"
 Vue.use(VueRouter);
 
 const routes = [{
@@ -53,6 +54,11 @@ const routes = [{
     //文章详情页
     path: "/postdetail",
     component: PostDetail
+  },
+  {
+    //精彩跟帖
+    path: "/morecomment",
+    component: MoreComment
   }
 ];
 
