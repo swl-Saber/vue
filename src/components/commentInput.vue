@@ -1,7 +1,7 @@
 <template>
   <div class="commentInput">
     <!-- 这里是未激活的状态 -->
-    <div class="disable" v-if="isShow">
+    <div class="disable" v-show="isShow">
       <input type="text" value="写跟帖" @focus="isShowEnable" />
       <div class="commentnum">
         <span class="iconfont iconpinglun-"></span>
@@ -11,7 +11,7 @@
       <span class="iconfont iconfenxiang"></span>
     </div>
     <!-- 这里是已激活的状态 -->
-    <div class="enable" v-else-if="!isShow">
+    <div class="enable" v-show="!isShow">
       <textarea rows="5" @blur="isShowDisable" ref="textareaDom">回复xxx</textarea>
       <div class="btnSend">发送</div>
     </div>
