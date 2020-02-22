@@ -58,18 +58,32 @@
         <span class="iconfont iconweixin"></span>微信
       </div>
     </div>
+    <!-- 水平线 -->
+    <div class="line">精彩跟帖</div>
+    <!-- 这里写评论 -->
+    <comment :comment="item" v-for="(item,index) of comments" :key="index"></comment>
+    <!-- 更多跟帖 -->
+    <div class="btnWrapper">
+      <div class="btnMore">更多跟帖</div>
+    </div>
   </div>
 </template>
 
 <script>
+import Comment from "@/components/comment/comment.vue";
 export default {
   data() {
     return {
-      postDetail: {}
+      postDetail: {},
+      comments: []
     };
   },
   mounted() {
     this.loadPage();
+    this.loadComment();
+  },
+  components: {
+    comment: Comment
   },
   methods: {
     loadPage() {
@@ -80,6 +94,16 @@ export default {
         console.log(res.data);
         const { data } = res.data;
         this.postDetail = data;
+      });
+    },
+    loadComment() {
+      this.$axios({
+        url: "/post_comment/" + this.$route.query.id,
+        method: "get"
+      }).then(res => {
+        console.log(res.data);
+        const { data } = res.data;
+        this.comments = data;
       });
     },
     clickFollow() {
@@ -130,6 +154,69 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.videoPost {
+  margin-left: 5.556vw;
+  margin-right: 5.556vw;
+  .topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .iconjiantou2 {
+        font-size: 4.167vw;
+      }
+      .iconnew {
+        font-size: 15vw;
+        color: rgb(252, 98, 124);
+      }
+    }
+  }
+  video {
+    max-width: 100%;
+    padding: 0 0 4.167vw;
+  }
+  .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .pic {
+        width: 6.944vw;
+        height: 6.944vw;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-right: 1.389vw;
+      }
+      .name {
+        font-size: 3.611vw;
+        color: rgb(122, 122, 122);
+      }
+    }
+    .btnfollow {
+      border: 1px solid rgb(255, 81, 0);
+      color: rgb(255, 81, 0);
+      padding: 0.833vw 5vw;
+      border-radius: 4.167vw;
+      font-size: 3.889vw;
+      &.hasFollow {
+        color: rgb(53, 53, 53);
+        border: 1px solid rgb(141, 141, 141);
+      }
+    }
+  }
+  .title {
+    font-size: 5.556vw;
+    font-weight: bold;
+    margin-bottom: 1.389vw;
+    margin-top: 4.167vw;
+  }
+}
 .normalPost {
   margin-left: 5.556vw;
   margin-right: 5.556vw;
@@ -238,67 +325,20 @@ export default {
     }
   }
 }
-.videoPost {
-  margin-left: 5.556vw;
-  margin-right: 5.556vw;
-  .topnav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .left {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .iconjiantou2 {
-        font-size: 4.167vw;
-      }
-      .iconnew {
-        font-size: 15vw;
-        color: rgb(252, 98, 124);
-      }
-    }
-  }
-  video {
-    max-width: 100%;
-    padding: 0 0 4.167vw;
-  }
-  .info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .left {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .pic {
-        width: 6.944vw;
-        height: 6.944vw;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-right: 1.389vw;
-      }
-      .name {
-        font-size: 3.611vw;
-        color: rgb(122, 122, 122);
-      }
-    }
-    .btnfollow {
-      border: 1px solid rgb(255, 81, 0);
-      color: rgb(255, 81, 0);
-      padding: 0.833vw 5vw;
-      border-radius: 4.167vw;
-      font-size: 3.889vw;
-      &.hasFollow {
-        color: rgb(53, 53, 53);
-        border: 1px solid rgb(141, 141, 141);
-      }
-    }
-  }
-  .title {
-    font-size: 5.556vw;
-    font-weight: bold;
-    margin-bottom: 1.389vw;
-    margin-top: 4.167vw;
+.line {
+  text-align: center;
+  font-size: 4.444vw;
+  border-top: 5px solid #ccc;
+  padding-top: 6.944vw;
+}
+.btnWrapper {
+  padding: 6.944vw 0;
+  .btnMore {
+    text-align: center;
+    font-size: 3.611vw;
+    border: 1px solid rgb(110, 110, 110);
+    padding: 1.389vw 8.333vw;
+    border-radius: 4.167vw;
   }
 }
 </style>
