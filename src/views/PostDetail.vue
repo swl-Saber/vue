@@ -64,7 +64,7 @@
     <comment :comment="item" v-for="(item,index) of comments" :key="index"></comment>
     <!-- 更多跟帖 -->
     <div class="btnWrapper">
-      <div class="btnMore">更多跟帖</div>
+      <div class="btnMore" @click="$router.push({path:'/morecomment?id='+$route.query.id})">更多跟帖</div>
     </div>
   </div>
 </template>
