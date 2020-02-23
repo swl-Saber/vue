@@ -13,7 +13,7 @@
       <div class="history">
         <h3>历史记录</h3>
         <div class="list">
-          <div v-for="(item,index) of history" :key="index">{{item}}</div>
+          <div v-for="(item,index) of history" :key="index" @click="historySearch(item)">{{item}}</div>
         </div>
       </div>
       <div class="hotSearch">
@@ -46,7 +46,7 @@ export default {
   },
   //这里挂载将历史记录保存在页面
   mounted() {
-    const historyStr = localStorage.getItem("historySearch");
+    const historyStr = localStorage.getItem("searchHistory");
     if (historyStr) {
       this.history = JSON.parse(historyStr);
     }
@@ -89,6 +89,10 @@ export default {
       } else {
         this.$router.back();
       }
+    },
+    historySearch(item) {
+      this.keyword = item;
+      this.sendKeyword();
     }
   }
 };
