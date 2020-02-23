@@ -1,6 +1,6 @@
 <template>
   <!-- <div>这里是登录页</div> -->
-  <div>
+  <div class="login">
     <div class="closeBtn">
       <span class="iconfont iconicon-test"></span>
     </div>
@@ -23,6 +23,9 @@
       @valueChange="setPassword"
     ></authinput>
     <authbutton text="登录" @clickbtn="login"></authbutton>
+    <router-link to="/register">
+      <authbutton text="注册"></authbutton>
+    </router-link>
   </div>
 </template>
 

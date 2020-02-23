@@ -133,9 +133,12 @@ export default {
     font-size: 3.889vw;
     background-color: #ff74a7;
     color: white;
-    border-radius: 25%;
-    margin-top: 1.389vw;
+    outline: none;
+    border: none;
+    border-radius: 5.556vw;
+    margin-top: 2.778vw;
     margin-left: 2.778vw;
+    padding: 2.778vw 5.556vw;
   }
 }
 </style>

@@ -62,7 +62,7 @@
       <!-- 水平线 -->
       <div class="line">精彩跟帖</div>
       <!-- 这里写评论 -->
-      <div v-if="comments.item">
+      <div v-if="comments">
         <comment :comment="item" v-for="(item,index) of comments" :key="index"></comment>
       </div>
       <div class="unComment" v-else>暂无跟帖，请抢占沙发</div>

@@ -19,6 +19,7 @@ export default {
 <style lang="less" scoped>
 .btnpadding {
   padding: 6.389vw;
+  padding-bottom: 0;
   .button {
     width: 100%;
     height: 13.889vw;

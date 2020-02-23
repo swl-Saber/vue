@@ -73,17 +73,6 @@ export default {
   },
 
   mounted() {
-    // this.$axios({
-    //   url: "/user/" + localStorage.getItem("user_id"),
-    //   method: "get",
-    //   headers: {
-    //     Authorization: localStorage.getItem("token")
-    //   }
-    // }).then(res => {
-    //   console.log(res.data);
-    //   const { data } = res.data;
-    //   this.userdata = data;
-    // });
     this.loadPage();
   },
   methods: {
