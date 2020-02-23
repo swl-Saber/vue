@@ -76,7 +76,12 @@
         <div class="btnMore" @click="$router.push({path:'/morecomment?id='+$route.query.id})">更多跟帖</div>
       </div>
       <!-- 这里插入回帖组件 -->
-      <commentinput :postId="$route.query.id" @sendMessage="refreshComment" ref="textarea"></commentinput>
+      <commentinput
+        :postId="$route.query.id"
+        @sendMessage="refreshComment"
+        ref="textarea"
+        :commentId="commentId"
+      ></commentinput>
     </div>
   </div>
 </template>
@@ -88,7 +93,8 @@ export default {
   data() {
     return {
       postDetail: {},
-      comments: []
+      comments: [],
+      commentId: ""
     };
   },
   mounted() {
@@ -168,9 +174,11 @@ export default {
       this.$router.back();
     },
     //点击回复弹出已激活状态输入评论框
-    callReply() {
+    callReply(id) {
       //这里给子组件一个ref可以直接调用子组件的函数
       this.$refs.textarea.isShowEnable();
+      // 接收子组件传来的一个评论id
+      this.commentId = id;
     },
     refreshComment() {
       this.loadComment();

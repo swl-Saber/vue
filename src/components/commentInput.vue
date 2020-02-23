@@ -26,12 +26,12 @@ export default {
       content: ""
     };
   },
-  props: ["postId"],
+  props: ["postId", "commentId"],
   methods: {
     // 获取焦点切换已激活状态
     isShowEnable() {
       this.isShow = false;
-      //延迟执行
+      //延迟执行,两个焦点冲突所以延迟获焦
       this.$nextTick(() => {
         this.$refs.textareaDom.focus();
       });
@@ -51,7 +51,8 @@ export default {
         url: "/post_comment/" + this.postId,
         method: "post",
         data: {
-          content: this.content
+          content: this.content,
+          parent_id: this.commentId
         }
       }).then(res => {
         console.log(res.message);

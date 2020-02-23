@@ -30,7 +30,7 @@ export default {
   },
   methods:{
     showTextarea(){
-      this.$emit('showTextarea')
+      this.$emit('showTextarea',this.comment.id)
     }
   }
 };
