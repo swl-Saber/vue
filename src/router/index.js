@@ -64,7 +64,7 @@ const routes = [{
   {
     //搜索页面
     path: "/search",
-    components: Search
+    component: Search
   }
 ];
 
