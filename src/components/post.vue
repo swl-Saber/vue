@@ -59,7 +59,7 @@ export default {
     }
     .info {
       font-size: 3.889vw;
-      color: #ccc;
+      color: rgb(136, 136, 136);
     }
   }
   .pic {
@@ -90,7 +90,7 @@ export default {
   }
   .info {
     font-size: 3.889vw;
-    color: #ccc;
+    color: rgb(136, 136, 136);
   }
 }
 //视频css样式
@@ -136,7 +136,7 @@ export default {
   }
   .info {
     font-size: 3.889vw;
-    color: #ccc;
+    color: rgb(136, 136, 136);
   }
 }
 </style>

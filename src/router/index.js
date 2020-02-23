@@ -10,6 +10,7 @@ import Myfollow from "../views/profile/myfollow.vue"
 import Collections from "../views/profile/collections.vue"
 import PostDetail from "../views/PostDetail.vue"
 import MoreComment from "../views/MoreComment.vue"
+import Search from "../views/Search.vue"
 Vue.use(VueRouter);
 
 const routes = [{
@@ -59,6 +60,11 @@ const routes = [{
     //精彩跟帖
     path: "/morecomment",
     component: MoreComment
+  },
+  {
+    //搜索页面
+    path: "/search",
+    components: Search
   }
 ];
 
