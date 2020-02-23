@@ -1,9 +1,9 @@
 <template>
   <div class="search">
     <div class="searchNav">
-      <span class="iconfont iconjiantou2"></span>
+      <span class="iconfont iconjiantou2" @click="gobackPage"></span>
       <div class="searchWrapper">
-        <span class="iconfont iconsearch" @click="gobackPage"></span>
+        <span class="iconfont iconsearch"></span>
         <input type="text" placeholder="请输入搜索内容" v-model="keyword" />
       </div>
       <div class="btnSearch" @click="sendKeyword">搜索</div>
@@ -37,23 +37,19 @@ export default {
     return {
       keyword: "",
       postList: [],
-      history: [
-        "美女",
-        "美女",
-        "美食",
-        "关晓彤",
-        "美女",
-        "美食",
-        "关晓彤",
-        "美女",
-        "美食",
-        "关晓彤"
-      ],
+      history: [],
       hotSearch: ["苹果 iPhone", "小米 11", "华为荣耀"]
     };
   },
   components: {
     post: Post
+  },
+  //这里挂载将历史记录保存在页面
+  mounted() {
+    const historyStr = localStorage.getItem("historySearch");
+    if (historyStr) {
+      this.history = JSON.parse(historyStr);
+    }
   },
   watch: {
     keyword(newVal) {
@@ -61,6 +57,12 @@ export default {
       if (newVal == "") {
         this.postList = [];
       }
+    },
+    history(newVal) {
+      //先将histor数组转换为字符串
+      const historyStr = JSON.stringify(this.history);
+      //把历史记录存进本地存储中
+      localStorage.setItem("searchHistory", historyStr);
     }
   },
   methods: {
@@ -73,6 +75,10 @@ export default {
         console.log(res.data);
         const { data } = res.data;
         this.postList = data;
+        //判断历史记录里显示的关键词是否重复
+        if (this.history.indexOf(this.keyword) == -1) {
+          this.history.push(this.keyword);
+        }
       });
     },
     //返回上一页的时候清空关键词，清空搜索结果
