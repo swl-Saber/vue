@@ -2,7 +2,7 @@
   <div class="commentInput">
     <!-- 这里是未激活的状态 -->
     <div class="disable" v-show="isShow">
-      <input type="text" value="写跟帖" @focus="isShowEnable" v-model="content" />
+      <input type="text" @focus="isShowEnable" v-model="content" />
       <div class="commentnum">
         <span class="iconfont iconpinglun-"></span>
         <div class="num">102</div>
@@ -12,7 +12,7 @@
     </div>
     <!-- 这里是已激活的状态 -->
     <div class="enable" v-show="!isShow">
-      <textarea rows="5" @blur="isShowDisable" ref="textareaDom" v-model="content">回复xxx</textarea>
+      <textarea rows="5" @blur="isShowDisable" ref="textareaDom" v-model="content"></textarea>
       <div class="btnSend" @click="sendMessage">发送</div>
     </div>
   </div>
@@ -54,7 +54,10 @@ export default {
           content: this.content
         }
       }).then(res => {
-        console.log(res.message);     
+        console.log(res.message);
+        //这里传事件给父组件用来调用函数刷新页面
+        this.$emit("sendMessage");
+        this.content = "";
       });
     }
   }

@@ -12,7 +12,7 @@
         <div class="name">{{comment.user.nickname}}</div>
         <div class="time">2小时前</div>
       </div>
-      <div class="btnReply">回复</div>
+      <div class="btnReply" @click="showTextarea">回复</div>
     </div>
 
     <parent :parent="comment.parent" v-if="comment.parent"></parent>
@@ -27,6 +27,11 @@ export default {
   props: ["comment"],
   components: {
     parent: Parent
+  },
+  methods:{
+    showTextarea(){
+      this.$emit('showTextarea')
+    }
   }
 };
 </script>

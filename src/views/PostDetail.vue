@@ -63,7 +63,12 @@
       <div class="line">精彩跟帖</div>
       <!-- 这里写评论 -->
       <div v-if="comments">
-        <comment :comment="item" v-for="(item,index) of comments" :key="index"></comment>
+        <comment
+          :comment="item"
+          v-for="(item,index) of comments"
+          :key="index"
+          @showTextarea="callReply"
+        ></comment>
       </div>
       <div class="unComment" v-else>暂无跟帖，请抢占沙发</div>
       <!-- 更多跟帖 -->
@@ -71,7 +76,7 @@
         <div class="btnMore" @click="$router.push({path:'/morecomment?id='+$route.query.id})">更多跟帖</div>
       </div>
       <!-- 这里插入回帖组件 -->
-      <commentinput :postId="$route.query.id"></commentinput>
+      <commentinput :postId="$route.query.id" @sendMessage="refreshComment" ref="textarea"></commentinput>
     </div>
   </div>
 </template>
@@ -161,6 +166,14 @@ export default {
     },
     gobackpage() {
       this.$router.back();
+    },
+    //点击回复弹出已激活状态输入评论框
+    callReply() {
+      //这里给子组件一个ref可以直接调用子组件的函数
+      this.$refs.textarea.isShowEnable();
+    },
+    refreshComment() {
+      this.loadComment();
     }
   }
 };
