@@ -2,7 +2,7 @@
   <div class="commentInput">
     <!-- 这里是未激活的状态 -->
     <div class="disable" v-show="isShow">
-      <input type="text" value="写跟帖" @focus="isShowEnable" />
+      <input type="text" value="写跟帖" @focus="isShowEnable" v-model="content" />
       <div class="commentnum">
         <span class="iconfont iconpinglun-"></span>
         <div class="num">102</div>
@@ -12,8 +12,8 @@
     </div>
     <!-- 这里是已激活的状态 -->
     <div class="enable" v-show="!isShow">
-      <textarea rows="5" @blur="isShowDisable" ref="textareaDom">回复xxx</textarea>
-      <div class="btnSend">发送</div>
+      <textarea rows="5" @blur="isShowDisable" ref="textareaDom" v-model="content">回复xxx</textarea>
+      <div class="btnSend" @click="sendMessage">发送</div>
     </div>
   </div>
 </template>
@@ -22,21 +22,40 @@
 export default {
   data() {
     return {
-      isShow: true
+      isShow: true,
+      content: ""
     };
   },
+  props: ["postId"],
   methods: {
     // 获取焦点切换已激活状态
     isShowEnable() {
       this.isShow = false;
-      //延迟执行焦点消失
+      //延迟执行
       this.$nextTick(() => {
         this.$refs.textareaDom.focus();
       });
     },
     //失去焦点切换未激活状态
     isShowDisable() {
-      this.isShow = true;
+      setTimeout(() => {
+        this.isShow = true;
+      }, 100);
+    },
+    // 发送评论
+    sendMessage() {
+      //这里点击发送，textarea会失去焦点，触发隐藏事件,导致执行不了函数
+      //所以需要在失去焦点后，设置个定时器，延迟触发切换
+      console.log(this.content);
+      this.$axios({
+        url: "/post_comment/" + this.postId,
+        method: "post",
+        data: {
+          content: this.content
+        }
+      }).then(res => {
+        console.log(res.message);     
+      });
     }
   }
 };

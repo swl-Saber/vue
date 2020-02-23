@@ -71,7 +71,7 @@
         <div class="btnMore" @click="$router.push({path:'/morecomment?id='+$route.query.id})">更多跟帖</div>
       </div>
       <!-- 这里插入回帖组件 -->
-      <commentinput></commentinput>
+      <commentinput :postId="$route.query.id"></commentinput>
     </div>
   </div>
 </template>
