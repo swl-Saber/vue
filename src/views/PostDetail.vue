@@ -81,6 +81,7 @@
         @sendMessage="refreshComment"
         ref="textarea"
         :commentId="commentId"
+        @deleteId="delId"
       ></commentinput>
     </div>
   </div>
@@ -180,8 +181,13 @@ export default {
       // 接收子组件传来的一个评论id,这里的id用来传给输入框发送ajax
       this.commentId = id;
     },
+    //发送评论刷新评论
     refreshComment() {
       this.loadComment();
+    },
+    //解决失去焦点后，评论id无法清除问题
+    delId() {
+      this.commentId = "";
     }
   }
 };

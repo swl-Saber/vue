@@ -38,9 +38,12 @@ export default {
     },
     //失去焦点切换未激活状态
     isShowDisable() {
+      //这里设置定时器是为了点击发送的时候，失去焦点，执行不了发送函数
       setTimeout(() => {
         this.isShow = true;
       }, 100);
+      //这里传一个自定义事件，解决失去焦点后，评论id无法清除问题
+      this.$emit('deleteId')
     },
     // 发送评论
     sendMessage() {
