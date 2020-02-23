@@ -1,12 +1,16 @@
 <template>
   <div>
-    <Parent :parent="parent.parent" v-if="parent.parent">{{parent.parent}}</Parent>
+    <Parent
+      :parent="parent.parent"
+      v-if="parent.parent"
+      @parentCallReply="diguiCallReply"
+    >{{parent.parent}}</Parent>
 
     <div class="parentWrapper">
       <div class="infoWrapper">
         <div class="name">{{parent.user.nickname}}</div>
         <div class="time">2小时前</div>
-        <div class="btnReply">回复</div>
+        <div class="btnReply" @click="parentCallReply">回复</div>
       </div>
       <div class="mainContent">{{parent.content}}</div>
     </div>
@@ -16,7 +20,15 @@
 <script>
 export default {
   name: "Parent",
-  props: ["parent"]
+  props: ["parent"],
+  methods: {
+    parentCallReply() {
+      this.$emit("parentCallReply", this.parent.id);
+    },
+    diguiCallReply(id) {
+      this.$emit("parentCallReply", id);
+    }
+  }
 };
 </script>
 

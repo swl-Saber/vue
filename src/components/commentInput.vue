@@ -58,6 +58,7 @@ export default {
         console.log(res.message);
         //这里传事件给父组件用来调用函数刷新页面
         this.$emit("sendMessage");
+        //清空输入框
         this.content = "";
       });
     }

@@ -177,7 +177,7 @@ export default {
     callReply(id) {
       //这里给子组件一个ref可以直接调用子组件的函数
       this.$refs.textarea.isShowEnable();
-      // 接收子组件传来的一个评论id
+      // 接收子组件传来的一个评论id,这里的id用来传给输入框发送ajax
       this.commentId = id;
     },
     refreshComment() {

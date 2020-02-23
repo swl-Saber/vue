@@ -15,7 +15,7 @@
       <div class="btnReply" @click="showTextarea">回复</div>
     </div>
 
-    <parent :parent="comment.parent" v-if="comment.parent"></parent>
+    <parent :parent="comment.parent" v-if="comment.parent" @parentCallReply="parentCallReply"></parent>
 
     <div class="mainComment">{{comment.content}}</div>
   </div>
@@ -28,9 +28,12 @@ export default {
   components: {
     parent: Parent
   },
-  methods:{
-    showTextarea(){
-      this.$emit('showTextarea',this.comment.id)
+  methods: {
+    showTextarea() {
+      this.$emit("showTextarea", this.comment.id);
+    },
+    parentCallReply(id) {
+      this.$emit("showTextarea", id);
     }
   }
 };
