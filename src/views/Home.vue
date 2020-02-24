@@ -76,21 +76,27 @@ export default {
     },
     //获取栏目
     getCategory() {
-      this.$axios({
-        url: "/category",
-        method: "get"
-      }).then(res => {
-        console.log(res.data);
-        const { data } = res.data;
-        // this.categoryList = data;
-        //现在不是直接赋值而是先经过一道函数处理
+      if (localStorage.getItem("activeTab")) {
+        const data = JSON.parse(localStorage.getItem("activeTab"));
         this.categoryList = this.initCategoryData(data);
-        console.log(this.categoryList);
-
-        // 加载完栏目数据的时候
-        //马上加载第一批文章数据
         this.getTabPost();
-      });
+      } else {
+        this.$axios({
+          url: "/category",
+          method: "get"
+        }).then(res => {
+          console.log(res.data);
+          const { data } = res.data;
+          // this.categoryList = data;
+          //现在不是直接赋值而是先经过一道函数处理
+          this.categoryList = this.initCategoryData(data);
+          console.log(this.categoryList);
+
+          // 加载完栏目数据的时候
+          //马上加载第一批文章数据
+          this.getTabPost();
+        });
+      }
     },
     //封装文章列表数据
     getTabPost() {
