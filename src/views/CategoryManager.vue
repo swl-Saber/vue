@@ -36,6 +36,14 @@ export default {
       deactiveTab: []
     };
   },
+  watch: {
+    activeTab(newVal) {
+      localStorage.setItem("activeTab", JSON.stringify(newVal));
+    },
+    deactiveTab(newVal) {
+      localStorage.setItem("deactiveTab", JSON.stringify(newVal));
+    }
+  },
   components: {
     topnav: topNav
   },
@@ -51,6 +59,10 @@ export default {
   },
   methods: {
     delTab(index) {
+      if (this.activeTab.length == 1) {
+        this.$toast("最少保留一个项目");
+        return;
+      }
       this.deactiveTab.push(this.activeTab[index]);
       this.activeTab.splice(index, 1);
     },
