@@ -48,14 +48,21 @@ export default {
     topnav: topNav
   },
   mounted() {
-    this.$axios({
-      url: "/category",
-      method: "get"
-    }).then(res => {
-      console.log(res.data);
-      const { data } = res.data;
-      this.activeTab = data;
-    });
+    //判断是否有旧数据
+    if (localStorage.getItem("activeTab")) {
+      this.activeTab = JSON.parse(localStorage.getItem("activeTab"));
+      this.deactiveTab = JSON.parse(localStorage.getItem("deactiveTab"));
+    } else {
+      // 如果没有旧数据证明是新用户,那么从服务器获取栏目列表
+      this.$axios({
+        url: "/category",
+        method: "get"
+      }).then(res => {
+        console.log(res.data);
+        const { data } = res.data;
+        this.activeTab = data;
+      });
+    }
   },
   methods: {
     delTab(index) {
