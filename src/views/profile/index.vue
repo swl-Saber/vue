@@ -22,6 +22,7 @@
       <tabbar tableft="我的关注" tabright="关注的用户" @handleClick="goMyfollow"></tabbar>
       <tabbar tableft="我的跟帖" tabright="跟帖/回复" @handleClick="goMyComment"></tabbar>
       <tabbar tableft="我的收藏" tabright="文章/视频" @handleClick="goCollections"></tabbar>
+      <tabbar tableft="管理栏目" @handleClick="goCategoryManager"></tabbar>
       <tabbar tableft="设置"></tabbar>
       <button class="esc" @click="logout">退出登录</button>
     </div>
@@ -58,6 +59,11 @@ export default {
     goMyComment() {
       this.$router.push({
         path: "/mycomment"
+      });
+    },
+    goCategoryManager() {
+      this.$router.push({
+        path: "/categorymanager"
       });
     }
   },
