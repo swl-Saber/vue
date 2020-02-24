@@ -41,7 +41,7 @@ export default {
     flex: 1;
     text-align: center;
     font-size: 4.444vw;
-    padding-right: 6.944vw;
+    padding-right: 7.5vw;
   }
 }
 </style>
