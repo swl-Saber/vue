@@ -11,6 +11,7 @@ import Collections from "../views/profile/collections.vue"
 import PostDetail from "../views/PostDetail.vue"
 import MoreComment from "../views/MoreComment.vue"
 import Search from "../views/Search.vue"
+import MyComment from "../views/MyComment.vue"
 Vue.use(VueRouter);
 
 const routes = [{
@@ -65,6 +66,11 @@ const routes = [{
     //搜索页面
     path: "/search",
     component: Search
+  },
+  {
+    //我的跟帖页面
+    path: "/mycomment",
+    component: MyComment
   }
 ];
 
