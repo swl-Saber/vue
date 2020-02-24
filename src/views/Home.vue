@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <homeheader></homeheader>
+    <span class="iconfont iconjiantou1" @click="$router.push({path:'/categorymanager'})"></span>
     <!-- 引入vant-ui组件库的Tab标签页 -->
     <van-tabs v-model="active" sticky>
       <!-- 栏目渲染 -->
@@ -141,4 +142,20 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="less" scoped>
+/deep/ .van-tabs__nav {
+  padding-right: 11.111vw;
+  position: relative;
+}
+.home {
+  .iconjiantou1 {
+    position: absolute;
+    top: 13.333vw;
+    transform: rotate(90deg);
+    right: 1.944vw;
+    z-index: 9;
+    color: rgb(53, 52, 52);
+    font-size: 3.611vw;
+  }
+}
+</style>

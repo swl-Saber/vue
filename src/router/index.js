@@ -12,6 +12,7 @@ import PostDetail from "../views/PostDetail.vue"
 import MoreComment from "../views/MoreComment.vue"
 import Search from "../views/Search.vue"
 import MyComment from "../views/MyComment.vue"
+import CategoryManager from "../views/CategoryManager.vue"
 Vue.use(VueRouter);
 
 const routes = [{
@@ -71,6 +72,11 @@ const routes = [{
     //我的跟帖页面
     path: "/mycomment",
     component: MyComment
+  },
+  {
+    // 栏目管理页面
+    path: "/categorymanager",
+    component: CategoryManager
   }
 ];
 
